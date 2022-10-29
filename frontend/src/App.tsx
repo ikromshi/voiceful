@@ -7,14 +7,12 @@ import Navigation from './routes/navigation/navigation';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
         <Routes>
           <Route path="/" element={<Navigation />}>
             <Route index element={<Index />}/>
             <Route path="auth" element={<Authentication />} />
           </ Route>
         </Routes>
-      </header>
     </div>
   );
 }
