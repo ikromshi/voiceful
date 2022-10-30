@@ -3,9 +3,9 @@ import "./sign-in.css";
 
 const SignIn = () => {
   return (
-    <Fragment>
-      <h3>Sign-in page</h3>
-    </Fragment>
+    <div className="sign-in">
+      <h3>Sign-in form</h3>
+    </div >
   )
 }
 
