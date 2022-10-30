@@ -8,7 +8,7 @@ const VoiceSelector = ({selected = 0, setSelected }: VoiceSelectorProps) => {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   const populateVoiceList = useCallback(() => {
-    const newVoices = synth.getVoices();
+    const newVoices = filterVoices();
     setVoices(newVoices);
   }, []);
 
@@ -31,5 +31,17 @@ const VoiceSelector = ({selected = 0, setSelected }: VoiceSelectorProps) => {
     </div>
   )
 }
+
+function filterVoices() {
+  return synth.getVoices().filter((voice) => (
+    voice.name === "Alex" || voice.name === "Daniel" || voice.name === "Fiona" || 
+    voice.name === "Karen" || voice.name === "Mei-Jia" || voice.name === "Rishi" || 
+    voice.name === "Samantha"  || voice.name === "Tessa" || voice.name === "Ting-Ting" || 
+    voice.name === "Victoria" || voice.name === "Yuri" || voice.name === "Google US English" ||
+    voice.name === "Google UK English Male" || voice.name === "Google español de Estados Unidos" ||
+    voice.name === "Google Nederlands"
+  ))
+}
+
 
 export default VoiceSelector;
