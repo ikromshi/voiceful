@@ -1,5 +1,7 @@
 import { FormEvent, useState } from "react";
 import VoiceSelector from "./voice-selector";
+import "./text-reader.css";
+
 const synth = window.speechSynthesis;
 
 const TextReader = () => {
@@ -21,9 +23,9 @@ const TextReader = () => {
   }
 
   return (
-    <div>
+    <div className="text-reader">
       <form onSubmit={speak}>
-        <input type="text" value={textValue} onChange={e => setTextValue(e.target.value)}/>
+        Enter text: <input type="text" value={textValue} onChange={e => setTextValue(e.target.value)}/>
         <VoiceSelector selected={selectedVoice} setSelected={setSelectedVoice}/>
         <button type="submit">Speak!</button>
       </form>

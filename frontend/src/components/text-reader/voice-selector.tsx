@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { VoiceSelectorProps } from "../../types/types";
+import "./voice-selector.css";
 
 const synth = window.speechSynthesis;
 
@@ -19,7 +20,7 @@ const VoiceSelector = ({selected = 0, setSelected }: VoiceSelectorProps) => {
   }, [populateVoiceList])
 
   return (
-    <div>
+    <div className="voice-selector">
       <select value={selected} onChange={(e) => setSelected(parseInt(e.target.value))}>
         {voices.map((voice, index) => (
           <option key={index} value={index}>
