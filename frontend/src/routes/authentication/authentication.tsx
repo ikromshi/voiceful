@@ -5,10 +5,10 @@ import "./authentication.css";
 
 const Authentication = () => {
   return (
-    <Fragment>
+    <div className="authentication">
       <SignIn />
       <SignUp />
-    </Fragment>
+    </div >
   )
 }
 
