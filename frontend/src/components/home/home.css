@@ -1,7 +1,8 @@
 .home {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   min-height: 80vh;
   font-size: 1.5rem;
+  margin: auto;
 }
