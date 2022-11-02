@@ -1,11 +1,14 @@
 from flask import Flask
-from flask_cors import CORS
 
-app = Flask(__name__)
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from config import Config
+from flask_cors import CORS
 CORS(app)
 
-##################################
-# Cross-origin resource sharing (CORS) is a browser security feature that restricts
-# cross-origin HTTP requests that are initiated from scripts running in the browser. 
+app = Flask(__name__)
+app.config.from_object(Config)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
-from app import routes
+from app import routes, models
