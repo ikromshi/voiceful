@@ -24,4 +24,5 @@
 
 # backend
 /backend/venv
-/backend/__pychache__
+/backend/__pycache__
+/backend/app/__pycache__
