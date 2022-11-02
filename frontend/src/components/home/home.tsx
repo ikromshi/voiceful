@@ -1,7 +1,7 @@
 import "./home.css";
 import axios from "axios";
 import { BackendDataType } from "../../types/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const api = axios.create({
   baseURL: "http://127.0.0.1:5000"
