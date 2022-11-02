@@ -22,5 +22,6 @@
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
-
+# backend
 /backend/venv
+/backend/__pychache__
