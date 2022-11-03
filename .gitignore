@@ -24,3 +24,5 @@
 
 
 /backend/venv
+/backend/__pychache__/
+/backend/app/__pychache__/
