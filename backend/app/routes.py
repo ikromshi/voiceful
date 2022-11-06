@@ -49,9 +49,9 @@ def clear_data():
 def reset_db():
     clear_data()
     #users
-    u1 = User(name="Arabella", password_hash="1234", email="afielder@ithaca.edu", voice="man")
-    u2 = User(name="Ikrom", password_hash="2345", email="inumonov@ithaca.edu", voice="man")
-    u3 = User(name="Lauren", password_hash="3456", email="lmitchell@ithaca.edu", voice="woman")
+    u1 = User(name="Arabella", password_hash="1234", email="afielder@ithaca.edu", voice="Alex")
+    u2 = User(name="Ikrom", password_hash="2345", email="inumonov@ithaca.edu", voice="Alex")
+    u3 = User(name="Lauren", password_hash="3456", email="lmitchell@ithaca.edu", voice="Karen")
     db.session.add_all([u1, u2, u3])
     db.session.commit()
 
