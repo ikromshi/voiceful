@@ -1,6 +1,8 @@
 from app import app, db
-from flask import flash
+from flask import flash, jsonify, request, datetime, timezone, timedelta
 from app.models import *
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
+import json
 
 @app.route('/')
 @app.route('/index')
@@ -44,18 +46,14 @@ def clear_data():
     db.session.execute(table.delete())
   db.session.commit()
 @app.route('/reset_db')
-
-
 def reset_db():
     clear_data()
-    #users
     u1 = User(name="Arabella", password_hash="1234", email="afielder@ithaca.edu", voice="Alex")
     u2 = User(name="Ikrom", password_hash="2345", email="inumonov@ithaca.edu", voice="Alex")
     u3 = User(name="Lauren", password_hash="3456", email="lmitchell@ithaca.edu", voice="Karen")
     db.session.add_all([u1, u2, u3])
     db.session.commit()
 
-    #folders
     f1 = Folder(name="Names", user_id=1)
     f2 = Folder(name="School", user_id=2)
     f3 = Folder(name="Places", user_id=3)
@@ -63,7 +61,6 @@ def reset_db():
     db.session.add_all([f1, f2, f3, f4])
     db.session.commit()
 
-    #buttons
     b1 = Button(name="Arabella", folder_id=1)
     b2 = Button(name="Ikrom", folder_id=1)
     b3 = Button(name="Doug", folder_id=1)
@@ -77,6 +74,53 @@ def reset_db():
     db.session.add_all([b1, b2, b3, b4, b5, b6, b7, b8, b9, b10])
     db.session.commit()
     return ""
+
+@app.route('/autocomplete')
+def autocomplete():
+
+    buttons_folders = ['Names', 'School', 'Arabella', 'Ikrom', 'Apple', 'Numonov']
+    q = request.args.get('q', "")
+    matches = list()
+    for a in buttons_folders:
+        if a.lower().startswith(q.lower()):
+            matches.append(a)
+
+    return jsonify(result=matches)
+
+@app.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            data = response.get_json()
+            if type(data) is dict:
+                data["access_token"] = access_token
+                response.data = json.dumps(data)
+        return response
+    except (RuntimeError, KeyError):
+        return response
+
+@app.route('/token', methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    if email != "test" or password != "test":
+        return {"msg": "Wrong email or password"}, 401
+
+    access_token = create_access_token(identity=email)
+    response = {"access_token":access_token}
+    return response
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
+
 
 
 
