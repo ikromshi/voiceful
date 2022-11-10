@@ -5,7 +5,6 @@ from app import db
 
 # from flask_login import UserMixin
 
-# password_hash = set_password(
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

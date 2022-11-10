@@ -1,12 +1,16 @@
 from app import app, db
-from flask import flash, jsonify, request, datetime, timezone, timedelta
+from flask import flash, jsonify, request
+from datetime import datetime, timezone, timedelta
 from app.models import *
-from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, \
+    JWTManager
 import json
+
 
 @app.route('/')
 @app.route('/index')
 def index():
+    populate_db()
     folders = {
         "posts": [
             {
@@ -37,16 +41,18 @@ def index():
     }
     return folders
 
+
 def clear_data():
-  flash("Resetting database: deleting old data and repopulating with dummy data")
-  # clear all data from all tables
-  meta = db.metadata
-  for table in reversed(meta.sorted_tables):
-    print('Clear table {}'.format(table))
-    db.session.execute(table.delete())
-  db.session.commit()
-@app.route('/reset_db')
-def reset_db():
+    flash("Resetting database: deleting old data and repopulating with dummy data")
+    # clear all data from all tables
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        print('Clear table {}'.format(table))
+        db.session.execute(table.delete())
+    db.session.commit()
+
+
+def populate_db():
     clear_data()
     u1 = User(name="Arabella", password_hash="1234", email="afielder@ithaca.edu", voice="Alex")
     u2 = User(name="Ikrom", password_hash="2345", email="inumonov@ithaca.edu", voice="Alex")
@@ -75,9 +81,9 @@ def reset_db():
     db.session.commit()
     return ""
 
+
 @app.route('/autocomplete')
 def autocomplete():
-
     buttons_folders = ['Names', 'School', 'Arabella', 'Ikrom', 'Apple', 'Numonov']
     q = request.args.get('q', "")
     matches = list()
@@ -86,6 +92,7 @@ def autocomplete():
             matches.append(a)
 
     return jsonify(result=matches)
+
 
 @app.after_request
 def refresh_expiring_jwts(response):
@@ -103,17 +110,22 @@ def refresh_expiring_jwts(response):
     except (RuntimeError, KeyError):
         return response
 
+
 @app.route('/token', methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-
-    if email != "test" or password != "test":
-        return {"msg": "Wrong email or password"}, 401
+    # if statement needs to check that user email goes with user password
+    # look to log in validation
+    user = User.query.filter_by(email=email).first()
+    if email is None or not user.check_password(password):
+        # if email != "test" or password != "test":
+        return {"msg": "Invalid email or password"}, 401
 
     access_token = create_access_token(identity=email)
-    response = {"access_token":access_token}
+    response = {"access_token": access_token}
     return response
+
 
 @app.route("/logout", methods=["POST"])
 def logout():
@@ -122,6 +134,16 @@ def logout():
     return response
 
 
-
-
-
+# sign up route
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    name = request.json.get("name", None)
+    password = request.json.get("password", None)
+    email = request.json.get("password", None)
+    if db.session.query(User).filter_by(email).first():
+        return {"msg": "User already exists"}, 401  # not sure which response to use
+    user = User(name=name, email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return {"msg": "User now registered"}, 200  # not sure which response to use here
