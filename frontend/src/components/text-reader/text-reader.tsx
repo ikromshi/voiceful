@@ -25,8 +25,10 @@ const TextReader = () => {
   return (
     <div className="text-reader">
       <form onSubmit={speak}>
-        Enter text: <input type="text" value={textValue} onChange={e => setTextValue(e.target.value)}/>
-        <VoiceSelector selected={selectedVoice} setSelected={setSelectedVoice}/>
+        <div className="input-dropdown">
+          <textarea placeholder="Enter your text:" value={textValue} onChange={e => setTextValue(e.target.value)}/>
+          <VoiceSelector selected={selectedVoice} setSelected={setSelectedVoice}/>
+        </div>
         <button type="submit">Speak!</button>
       </form>
     </div>
