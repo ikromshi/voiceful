@@ -1,13 +1,13 @@
 import axios from "axios";
 import { FormEvent, useState } from "react"
-import useToken from "../../utils/useToke";
+import useToken from "../../utils/userToken";
 
 const SignIn = () => {
-  const [logingForm, setLoginForm] = useState({email: "", password: ""});
-  const { setToken } = useToken();
+  const [signInForm, setSignInForm] = useState({email: "", password: ""});
+  const { setToken, token } = useToken();
 
   const logUserIn = async (event: FormEvent) => {
-    axios({method: "POST", url: "/token", data: {email: logingForm.email, password: logingForm.password}})
+    axios({method: "POST", url: "http://127.0.0.1:5000/token", data: {email: signInForm.email, password: signInForm.password}})
    .then((response) => {
       setToken(response.data.access_token);
     }).catch((error) => {
@@ -17,12 +17,13 @@ const SignIn = () => {
         console.log(error.response.headers);
       }
     });
-    setLoginForm(({email: "", password: ""}));
+    setSignInForm(({email: "", password: ""}));
+    event.preventDefault();
   }
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     const { value, name } = event.target as HTMLInputElement;
-    setLoginForm((prevValue) => ({...prevValue, [name]: value}));
+    setSignInForm((prevValue) => ({...prevValue, [name]: value}));
   }
 
   return (
@@ -33,12 +34,13 @@ const SignIn = () => {
           type="email"
           onChange={handleChange} 
           placeholder="Email:"
-          value={logingForm.email}/>
+          name="email"
+          value={signInForm.email}/>
         <input type="password" 
           onChange={handleChange}
           name="password"
           placeholder="Password:"
-          value={logingForm.password}
+          value={signInForm.password}
           />
         <button onClick={logUserIn}>Sign in</button>
       </form>
