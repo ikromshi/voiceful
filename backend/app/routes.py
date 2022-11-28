@@ -54,9 +54,12 @@ def clear_data():
 
 def populate_db():
     clear_data()
-    u1 = User(name="Arabella", password_hash="1234", email="afielder@ithaca.edu", voice="Alex")
-    u2 = User(name="Ikrom", password_hash="2345", email="inumonov@ithaca.edu", voice="Alex")
-    u3 = User(name="Lauren", password_hash="3456", email="lmitchell@ithaca.edu", voice="Karen")
+    u1 = User(name="Arabella", password="1234", email="afielder@ithaca.edu", voice="Alex")
+    u2 = User(name="Ikrom", password="2345", email="inumonov@ithaca.edu", voice="Alex")
+    u3 = User(name="Lauren", password="3456", email="lmitchell@ithaca.edu", voice="Karen")
+    u1.set_password("1234")
+    u2.set_password("2345")
+    u3.set_password("3456")
     db.session.add_all([u1, u2, u3])
     db.session.commit()
 
@@ -123,7 +126,7 @@ def create_token():
         return {"msg": "Invalid email or password"}, 401
 
     access_token = create_access_token(identity=email)
-    response = {"access_token": access_token}
+    response = {"access_token": access_token, "email": user.email, "password": user.password, "name": user.name, "voice": user.voice}
     return response
 
 
