@@ -15,6 +15,8 @@ export type UserType = null | {
   name: string | null;
   email: string | null;
   password: string | null;
+  voice: string | null;
+  access_token: string | null;
 }
 
 export type UserStateType = {

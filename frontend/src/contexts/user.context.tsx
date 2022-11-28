@@ -25,7 +25,9 @@ const INITIAL_STATE: UserStateType = {
   currentUser: {
     name: null,
     email: null,
-    password: null
+    password: null,
+    voice: null,
+    access_token: null
   }
 };
 

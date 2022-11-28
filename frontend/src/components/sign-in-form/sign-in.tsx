@@ -1,20 +1,21 @@
 import axios from "axios";
-import { FormEvent, useState } from "react"
-import useToken from "../../utils/userToken";
+import { FormEvent, useState, useContext } from "react"
+import { UserContext } from "../../contexts/user.context";
 
 const SignIn = () => {
+  const { setCurrentUser, currentUser } = useContext(UserContext);
   const [signInForm, setSignInForm] = useState({email: "", password: ""});
-  const { setToken, token } = useToken();
 
   const logUserIn = async (event: FormEvent) => {
     axios({method: "POST", url: "http://127.0.0.1:5000/token", data: {email: signInForm.email, password: signInForm.password}})
-   .then((response) => {
-      setToken(response.data.access_token);
-    }).catch((error) => {
+    .then((response) => {
+        setCurrentUser(response.data);
+      }).catch((error) => {
       if (error.response) {
         console.log(error.response);
         console.log(error.response.status);
         console.log(error.response.headers);
+        alert("Incorrect email or password");
       }
     });
     setSignInForm(({email: "", password: ""}));
