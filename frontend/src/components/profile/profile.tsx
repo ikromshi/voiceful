@@ -13,7 +13,8 @@ const Profile = () => {
   }, []);
 
 
-  const saveData = async () => {
+  const saveData = async (event: FormEvent) => {
+    event.preventDefault();
     setCurrentUser(profileForm);
 
     axios({method: "POST", url: "http://127.0.0.1:5000/profile", headers: {Authorization: "Bearer " + profileForm.access_token}, data:profileForm})
@@ -69,7 +70,9 @@ const Profile = () => {
               placeholder="Select voice*:"
               value={profileForm.voice}
               />
-            <button onClick={saveData}></button>
+            <button onClick={saveData}>
+              <span>Save</span>
+            </button>
           </form>
         </div>
       </div>

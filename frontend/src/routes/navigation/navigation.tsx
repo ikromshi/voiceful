@@ -28,7 +28,9 @@ const Navigation = () => {
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/text-reader">Text Reader</Link>
           {!currentUser ? 
-            <Link className="nav-link" to="/auth">Auth</Link> :
+            <Fragment>
+              <Link className="nav-link" to="/auth">Sign-in/Sign-up</Link> 
+            </Fragment> :
             <Fragment>
               <Link className="nav-link" to="/profile">Profile</Link>
               <button onClick={logUserOut}>Log Out</button>

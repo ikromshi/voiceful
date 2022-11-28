@@ -153,7 +153,7 @@ def signup():
     return {"msg": "User now registered", "access_token": access_token}, 200
 
 
-@app.route("/profile", methods=["GET", "POST"])
+@app.route("/profile", methods=["POST"])
 def profile():
     name = request.json.get("name", None)
     password = request.json.get("password", None)
