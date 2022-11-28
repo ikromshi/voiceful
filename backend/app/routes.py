@@ -137,7 +137,6 @@ def logout():
     return response
 
 
-# sign up route
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     name = request.json.get("name", None)
@@ -145,10 +144,31 @@ def signup():
     email = request.json.get("email", None)
     voice = request.json.get("voice", None)
     if db.session.query(User).filter_by(email=email).first():
-        return {"msg": "User already exists"}, 401  # not sure which response to use
+        return {"msg": "User already exists"}, 401
     user = User(name=name, email=email, password=password, voice=voice)
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
     access_token = create_access_token(identity=email)
-    return {"msg": "User now registered", "access_token": access_token}, 200  # not sure which response to use here
+    return {"msg": "User now registered", "access_token": access_token}, 200
+
+
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    name = request.json.get("name", None)
+    password = request.json.get("password", None)
+    email = request.json.get("email", None)
+    voice = request.json.get("voice", None)
+
+    # Are these properties read-only?
+    user = User.query.filter_by(email=email).first()
+    user.set_password(password)
+    user.name = name
+    user.password = password
+    user.email = email
+    user.voice = voice
+
+    db.session.add(user)
+    db.session.commit()
+
+    return {"msg": "User data successfully updated"}, 200

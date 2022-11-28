@@ -7,7 +7,7 @@ const Profile = () => {
   const { setToken, token } = useToken();
 
   const getData = () => {
-    axios({method: "GET", url: "/profile", headers: {Autharization: "Bearer " + token}})
+    axios({method: "GET", url: "/profile", headers: {Authorization: "Bearer " + token}})
       .then((response) => {
         const res = response.data;
         res.access_token && setToken(res.access_token);
