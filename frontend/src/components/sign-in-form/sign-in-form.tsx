@@ -1,11 +1,13 @@
 import axios from "axios";
 import { FormEvent, useState, useContext } from "react"
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import "./sign-in-form.css";
 
 const SignInForm = () => {
   const { setCurrentUser } = useContext(UserContext);
   const [signInForm, setSignInForm] = useState({email: "", password: ""});
+  const navigate = useNavigate();
 
   const logUserIn = async (event: FormEvent) => {
     event.preventDefault();
@@ -13,6 +15,7 @@ const SignInForm = () => {
     axios({method: "POST", url: "http://127.0.0.1:5000/token", data: {email: signInForm.email, password: signInForm.password}})
     .then((response) => {
         setCurrentUser(response.data);
+        navigate("/");
       }).catch((error) => {
       if (error.response) {
         console.log(error.response);

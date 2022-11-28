@@ -1,11 +1,13 @@
 import axios from "axios";
 import { FormEvent, useContext, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import "./sign-up-form.css";
 
 const SignUpForm = () => {
   const { setCurrentUser } = useContext(UserContext);
   const [signUpForm, setSignUpForm] = useState({email: "", password: "", name: "", voice: ""});
+  const navigate = useNavigate();
 
   const signUp = async (event: FormEvent) => {
     event.preventDefault();
@@ -14,7 +16,7 @@ const SignUpForm = () => {
     .then((response) => {
       const { access_token } = response.data;
       setCurrentUser({...signUpForm, access_token: access_token});
-      console.log(response);
+      navigate("/");
     }).catch((error) => {
       if (error.response) {
         console.log(error.response);
