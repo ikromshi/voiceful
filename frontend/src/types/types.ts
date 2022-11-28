@@ -12,11 +12,11 @@ export type BackendDataType = {
 };
 
 export type UserType = null | {
-  name: string | null;
-  email: string | null;
-  password: string | null;
-  voice: string | null;
-  access_token: string | null;
+  name: string;
+  email: string;
+  password: string;
+  voice: string;
+  access_token: string;
 }
 
 export type UserStateType = {
