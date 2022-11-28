@@ -1,8 +1,8 @@
+import Profile from "../../components/profile/profile";
+
 const ProfileRoute = () => {
   return (
-    <div>
-
-    </div>
+    <Profile />
   )
 }
 
