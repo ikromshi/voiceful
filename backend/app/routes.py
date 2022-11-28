@@ -142,11 +142,13 @@ def logout():
 def signup():
     name = request.json.get("name", None)
     password = request.json.get("password", None)
-    email = request.json.get("password", None)
-    if db.session.query(User).filter_by(email).first():
+    email = request.json.get("email", None)
+    voice = request.json.get("voice", None)
+    if db.session.query(User).filter_by(email=email).first():
         return {"msg": "User already exists"}, 401  # not sure which response to use
-    user = User(name=name, email=email)
+    user = User(name=name, email=email, password=password, voice=voice)
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
-    return {"msg": "User now registered"}, 200  # not sure which response to use here
+    access_token = create_access_token(identity=email)
+    return {"msg": "User now registered", "access_token": access_token}, 200  # not sure which response to use here
