@@ -1,12 +1,14 @@
-import { createContext, useReducer } from "react";
+import { createContext, ReactElement, useReducer } from "react";
+import { UserActionType, UserStateType, UserType, UserContextType } from "../types/types";
 import { USER_ACTION_TYPES } from "../utils/actionTypes";
 
-export const UserContext = createContext({
-  setCurrentUser: () => null,
+export const UserContext = createContext<UserContextType>({
+  setCurrentUser: () => {},
+  unsetCurrentUser: () => {},
   currentUser: null
 });
 
-const UserReducer = (state, action) => {
+const UserReducer = (state: UserStateType, action: UserActionType) => {
   const { type, payload } = action;
 
   switch(type) {
@@ -19,15 +21,19 @@ const UserReducer = (state, action) => {
   }
 } 
 
-const INITIAL_STATE = {
-  currentUser: null
+const INITIAL_STATE: UserStateType = {
+  currentUser: {
+    name: null,
+    email: null,
+    password: null
+  }
 };
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }: {children: ReactElement}) => {
   const [ state, dispatch ] = useReducer(UserReducer, INITIAL_STATE);
   const { currentUser } = state;
   
-  const setCurrentUser = (user) => {
+  const setCurrentUser = (user : UserType) => {
     dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
   };
 
