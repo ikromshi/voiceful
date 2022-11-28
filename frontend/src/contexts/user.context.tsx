@@ -28,9 +28,17 @@ const INITIAL_STATE = {
 
 export const UserProvider = ({ children }: {children: ReactElement}) => {
   const [ state, dispatch ] = useReducer(UserReducer, INITIAL_STATE);
-  const { currentUser } = state;
+  
+  // Saving the user in state to potentially use later;
+  const userInState = state.currentUser;
+
+  // If no user is found in local storage, use the user in state;
+  const userJson = localStorage.getItem("currentUser");
+  const currentUser = userJson !== null ? JSON.parse(userJson) : userInState;
   
   const setCurrentUser = (user : UserType) => {
+    // Put the user in local storage for the data to persist between page reloads;
+    localStorage.setItem("currentUser", JSON.stringify(user));
     dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
   };
 

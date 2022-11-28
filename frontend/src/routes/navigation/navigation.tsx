@@ -11,6 +11,7 @@ const Navigation = () => {
     axios({method: "POST", url: "http://127.0.0.1:5000/logout"})
       .then((response) => {
         unsetCurrentUser();
+        localStorage.removeItem("currentUser");
       }).catch((error) => {
         if (error.response) {
           console.log(error.response);
