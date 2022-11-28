@@ -1,9 +1,9 @@
 import axios from "axios";
 import { FormEvent, useContext, useState } from "react"
 import { UserContext } from "../../contexts/user.context";
-import "./sign-up.css";
+import "./sign-up-form.css";
 
-const SignUp = () => {
+const SignUpForm = () => {
   const { setCurrentUser } = useContext(UserContext);
   const [signUpForm, setSignUpForm] = useState({email: "", password: "", name: "", voice: ""});
 
@@ -66,4 +66,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp;
+export default SignUpForm;

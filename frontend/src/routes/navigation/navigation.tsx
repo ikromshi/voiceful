@@ -30,7 +30,8 @@ const Navigation = () => {
           <Link className="nav-link" to="/text-reader">Text Reader</Link>
           {!currentUser ? 
             <Fragment>
-              <Link className="nav-link" to="/auth">Sign-in/Sign-up</Link> 
+              <Link className="nav-link" to="/sign-in">Sign In</Link>
+              <Link className="nav-link" to="/sign-up">Sign Up</Link>
             </Fragment> :
             <Fragment>
               <Link className="nav-link" to="/profile">Profile</Link>
