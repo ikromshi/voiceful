@@ -1,16 +1,16 @@
 import "./navigation.css";
 import axios from "axios";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import useToken from "../../utils/userToken";
+import { UserContext } from "../../contexts/user.context";
 
 const Navigation = () => {
-  const { removeToken, token } = useToken();
+  const { currentUser, unsetCurrentUser } = useContext(UserContext);
   
   const logUserOut = () => {
-    axios({method: "POST", url: "/logout"})
+    axios({method: "POST", url: "http://127.0.0.1:5000/logout"})
       .then((response) => {
-        removeToken();
+        unsetCurrentUser();
       }).catch((error) => {
         if (error.response) {
           console.log(error.response);
@@ -27,7 +27,7 @@ const Navigation = () => {
         <div className="nav-links">
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/text-reader">Text Reader</Link>
-          {!token && token !== "" && token !== undefined ? 
+          {!currentUser ? 
             <Link className="nav-link" to="/auth">Auth</Link> :
             <Fragment>
               <Link className="nav-link" to="/profile">Profile</Link>

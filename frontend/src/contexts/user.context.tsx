@@ -21,14 +21,9 @@ const UserReducer = (state: UserStateType, action: UserActionType) => {
   }
 } 
 
-const INITIAL_STATE: UserStateType = {
-  currentUser: {
-    name: null,
-    email: null,
-    password: null,
-    voice: null,
-    access_token: null
-  }
+const INITIAL_STATE = {
+  currentUser: null,
+  isUserSignedIn: false
 };
 
 export const UserProvider = ({ children }: {children: ReactElement}) => {
