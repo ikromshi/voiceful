@@ -3,10 +3,12 @@ import { FormEvent, useState, useContext } from "react"
 import { UserContext } from "../../contexts/user.context";
 
 const SignIn = () => {
-  const { setCurrentUser, currentUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
   const [signInForm, setSignInForm] = useState({email: "", password: ""});
 
   const logUserIn = async (event: FormEvent) => {
+    event.preventDefault();
+    
     axios({method: "POST", url: "http://127.0.0.1:5000/token", data: {email: signInForm.email, password: signInForm.password}})
     .then((response) => {
         setCurrentUser(response.data);
@@ -19,7 +21,6 @@ const SignIn = () => {
       }
     });
     setSignInForm(({email: "", password: ""}));
-    event.preventDefault();
   }
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
