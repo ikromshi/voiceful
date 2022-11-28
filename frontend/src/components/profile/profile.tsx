@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
-import useToken from "../../utils/useToke";
+import useToken from "../../utils/userToken";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({profileName: "", aboutMe: ""});
