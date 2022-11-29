@@ -17,7 +17,7 @@ const UserReducer = (state: UserStateType, action: UserActionType) => {
     case USER_ACTION_TYPES.UNSET_CURRENT_USER:
       return {...state, currentUser: payload};
     default:
-      throw new Error(`Unhandled type ${type} in userReducer`);
+      throw new Error(`Unhandled type ${type} in UserReducer`);
   }
 } 
 
