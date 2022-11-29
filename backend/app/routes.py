@@ -154,6 +154,7 @@ def signup():
 
 
 @app.route("/profile", methods=["POST"])
+@jwt_required()
 def profile():
     name = request.json.get("name", None)
     password = request.json.get("password", None)

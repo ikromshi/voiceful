@@ -1,0 +1,90 @@
+{
+  "folders": [
+    {
+      "id": 1, 
+      "name": "School",
+      "user_id": 2,
+      "buttons": [
+        {
+          "id": 1,
+          "name": "Hello",
+          "folder_id": 1
+        },
+        {
+          "id": 2,
+          "name": "Book",
+          "folder_id": 1
+        },
+        {
+          "id": 3,
+          "name": "Pencil",
+          "folder_id": 1
+        },
+        {
+          "id": 4,
+          "name": "What's your name?",
+          "folder_id": 1
+        },
+        {
+          "id": 5,
+          "name": "Let's hang out",
+          "folder_id": 1
+        }
+      ]
+    },
+    {
+      "id": 2, 
+      "name": "Food",
+      "user_id": 3,
+      "buttons": [
+        {
+          "id": 1,
+          "name": "What's for dinner?",
+          "folder_id": 2
+        },
+        {
+          "id": 2,
+          "name": "I'm hungry",
+          "folder_id": 2
+        },
+        {
+          "id": 3,
+          "name": "I like burgers",
+          "folder_id": 2
+        }
+      ]
+    },
+    {
+      "id": 3, 
+      "name": "Places",
+      "user_id": 1,
+      "buttons": [
+        {
+          "id": 1,
+          "name": "School",
+          "folder_id": 3
+        },
+        {
+          "id": 2,
+          "name": "Home",
+          "folder_id": 3
+        },
+        {
+          "id": 3,
+          "name": "Bar",
+          "folder_id": 3
+        },
+        {
+          "id": 4,
+          "name": "Wendy's",
+          "folder_id": 3
+        },
+        {
+          "id": 5,
+          "name": "Ithaca",
+          "folder_id": 3
+        }
+      ]
+    }
+  ]
+}
