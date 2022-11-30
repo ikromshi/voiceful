@@ -82,7 +82,7 @@ export const FolderProvider = ({ children } : {children: ReactElement}) => {
 function removeFolder(folders: any, folderName: string) {
   const newFolders: any[] = [];
 
-  folders.map((folder: any) => {
+  folders.forEach((folder: any) => {
     if (folder.name !== folderName) {
       newFolders.push(folder);
     }
@@ -93,7 +93,7 @@ function removeFolder(folders: any, folderName: string) {
 function addButtonToFolder(folders: any, folderID: number, button: any) {
   const newFolders: any[] = [];
 
-  folders.map((folder: any) => {
+  folders.forEach((folder: any) => {
     if (folder.id === folderID) {
       folder.buttons.push(button);
     }
@@ -104,9 +104,9 @@ function addButtonToFolder(folders: any, folderID: number, button: any) {
 function removeButtonFromFolder(folders: any, buttonName: string) {
   const newFolders: any = [];
 
-  folders.map((folder: any) => {
+  folders.forEeach((folder: any) => {
     const newButtons: any[] = [];
-    folder.buttons.map((button: any) => {
+    folder.buttons.forEach((button: any) => {
       if (button.name !== buttonName) {
         newButtons.push(button);
       }
