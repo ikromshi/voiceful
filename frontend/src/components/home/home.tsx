@@ -5,6 +5,7 @@ import TextReader from "../text-reader/text-reader";
 import { UserContext } from "../../contexts/user.context";
 import { FolderContext } from "../../contexts/folder.context";
 import ButtonsPreview from "../buttons-preview/buttons-preview";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
@@ -33,7 +34,7 @@ const Home = () => {
   return (
     <Fragment>
       <TextReader />
-      {!currentUser && 
+      {currentUser ? <Link to="/folders"><button>Conversation Buttons</button></Link> :
         <ButtonsPreview />
       }
     </Fragment>

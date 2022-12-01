@@ -173,3 +173,39 @@ def profile():
     db.session.commit()
 
     return {"msg": "User data successfully updated"}, 200
+
+@app.route('/folder', methods=['GET', 'POST'])
+def folder():
+    if request.method == 'POST':
+        folder = request.json.get("folder", None)
+        email = request.json.get("email", None)
+        user = User.query.filter_by(email=email).first()
+        nFolder = Folder(name=folder, user_id=user.id)
+        db.session.add(nFolder)
+        db.session.commit()
+        return {"msg": "New folder created"}, 200 # not sure which response to use here
+    elif request.method == 'GET':
+        email = request.json.get("email", None)
+        user = User.query.filter_by(email=email).first()
+        folders = Folder.query.filter_by(user_id=user.id).all()
+        return {"msg": "Successful folder query", "data": f"{folders}"}, 200
+    else:
+        return {"msg": "Method type not found"}, 401
+
+@app.route('/button', methods=['GET', 'POST'])
+def button():
+    if request.method == 'POST':
+        buttonCollected = request.json.get("button", None)
+        folder = request.json.get("folder", None)
+        folderFound = Folder.query.filter_by(name=folder).first()
+        newButton = Button(name=buttonCollected, folder_id=folderFound.id)
+        db.session.add(newButton)
+        db.session.commit()
+        return {"msg": "New button created"}, 200
+    elif request.method == 'GET':
+        folderName = request.json.get("folder", None)
+        folder = Folder.query.filter_by(name=folderName).first()
+        buttons = Button.query.filter_by(folder_id=folder.id).all()
+        return {"msg": "Successful button query", "data": f"{buttons}"}, 200
+    else:
+        return {"msg": "Method type not found"}
