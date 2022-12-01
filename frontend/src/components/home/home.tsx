@@ -4,7 +4,7 @@ import { Fragment, useContext, useEffect } from "react";
 import TextReader from "../text-reader/text-reader";
 import { UserContext } from "../../contexts/user.context";
 import { FolderContext } from "../../contexts/folder.context";
-import FoldersPreview from "../folders-preview/folders-preview";
+import ButtonsPreview from "../buttons-preview/buttons-preview";
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
@@ -34,7 +34,7 @@ const Home = () => {
     <Fragment>
       <TextReader />
       {!currentUser && 
-        <FoldersPreview />
+        <ButtonsPreview />
       }
     </Fragment>
   )
