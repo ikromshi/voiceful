@@ -174,25 +174,28 @@ def profile():
 
     return {"msg": "User data successfully updated"}, 200
 
-@app.route('/folder', methods=['GET', 'POST'])
-def folder():
-    if request.method == 'POST':
-        folder = request.json.get("folder", None)
-        email = request.json.get("email", None)
-        user = User.query.filter_by(email=email).first()
-        nFolder = Folder(name=folder, user_id=user.id)
-        db.session.add(nFolder)
-        db.session.commit()
-        return {"msg": "New folder created"}, 200 # not sure which response to use here
-    elif request.method == 'GET':
-        email = request.json.get("email", None)
-        user = User.query.filter_by(email=email).first()
-        folders = Folder.query.filter_by(user_id=user.id).all()
-        return {"msg": "Successful folder query", "data": f"{folders}"}, 200
-    else:
-        return {"msg": "Method type not found"}, 401
 
-@app.route('/button', methods=['GET', 'POST'])
+@app.route('/get_folders', methods=['GET', 'POST'])
+def folder():
+    email = request.json.get("email", None)
+    user = User.query.filter_by(email=email).first()
+    folders = Folder.query.filter_by(user_id=user.id).all()
+    folders_to_return = folder_and_button_query(user, folders).copy()
+    return {"msg": "Successful folder query", "data": f"{json.dumps(folders_to_return)}"}, 200
+
+
+@app.route('/put_folders', methods=["POST"])
+def add_folder():
+    folder = request.json.get("folder", None)
+    email = request.json.get("email", None)
+    user = User.query.filter_by(email=email).first()
+    nFolder = Folder(name=folder, user_id=user.id)
+    db.session.add(nFolder)
+    db.session.commit()
+    return {"msg": "New folder created"}, 200 
+
+
+@app.route('/buttons', methods=['GET', 'POST'])
 def button():
     if request.method == 'POST':
         buttonCollected = request.json.get("button", None)
@@ -209,3 +212,24 @@ def button():
         return {"msg": "Successful button query", "data": f"{buttons}"}, 200
     else:
         return {"msg": "Method type not found"}
+
+# constructs and returns a standard dictionary of folders with buttons
+def folder_and_button_query(user, folder_list_in):
+    return_folders_json = {}
+    return_folders_list = []
+    temp_button = {}
+
+    for folder in folder_list_in:
+        buttons = Button.query.filter_by(folder_id=folder.id).all()
+        return_folder = {}
+
+        for button in buttons:
+            temp_button = dict(id=button.id, name=button.name, folder_id=button.folder_id)
+        
+        return_folder = dict(id=folder.id, name=folder.name, user_id=user.id, buttons=[])
+        return_folder["buttons"].append(temp_button)
+        return_folders_list.append(return_folder)
+    
+    return_folders_json["folders"] = return_folders_list
+    
+    return return_folders_json
