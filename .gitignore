@@ -31,3 +31,4 @@
 /backend/alembic.ini
 /backend/app.db
 /backend/config.py
+/backend/.idea
