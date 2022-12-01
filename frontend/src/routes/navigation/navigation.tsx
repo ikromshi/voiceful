@@ -29,7 +29,6 @@ const Navigation = () => {
         <h3>Navigation page</h3>
         <div className="nav-links">
           <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/text-reader">Text Reader</Link>
           {!currentUser ? 
             <Fragment>
               <Link className="nav-link" to="/sign-in">Sign In</Link>
