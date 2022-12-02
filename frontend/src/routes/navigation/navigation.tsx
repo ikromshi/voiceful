@@ -13,6 +13,7 @@ const Navigation = () => {
       .then((response) => {
         unsetCurrentUser();
         localStorage.removeItem("currentUser");
+        localStorage.removeItem("folders");
         navigate("/");
       }).catch((error) => {
         if (error.response) {
