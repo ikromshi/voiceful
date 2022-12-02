@@ -18,9 +18,11 @@ const Folder = () => {
   }, []);
 
   return (
-    <div className="folder">
+    <div className="folder-container">
       {buttons.map((button: any, idx: number) => {
-        return <h3 key={idx}>{button.name.toUpperCase()}</h3>
+        return <div key={idx} className="folder">
+                <div className="folder-name" >{button.name.toUpperCase()}</div>
+              </div>
       })}
     </div>
   )

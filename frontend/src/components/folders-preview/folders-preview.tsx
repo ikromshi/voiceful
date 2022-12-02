@@ -11,13 +11,13 @@ const FoldersPreview = () => {
     <div className="folders-preview">
       {folders?.map((folder: any, idx: number) => {
         return (
-        <div key={idx} className="folder-name-div">
-          <Link to={folder.name}>
-            <h3>
+        <Link key={idx} to={folder.name}>
+          <div className="folder-name-container">
+            <div className="folder-name">
               {folder.name.toUpperCase()}
-            </h3> 
-          </Link>
-        </div>
+            </div>
+          </div>
+        </Link>
         )
       })}
     </div>

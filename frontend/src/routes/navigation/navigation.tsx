@@ -27,7 +27,7 @@ const Navigation = () => {
   return (
     <Fragment>
       <div className="nav-container">
-        <h3>Navigation page</h3>
+        <h3>[Icon probably]</h3>
         <div className="nav-links">
           <Link className="nav-link" to="/">Home</Link>
           {!currentUser ? 
