@@ -4,7 +4,8 @@ import ProfileRoute from './routes/profile/profile.route';
 import Navigation from './routes/navigation/navigation';
 import SignIn from './routes/authentication/sign-in';
 import SignUp from './routes/authentication/sign-up';
-import Folders from './components/folders/folder';
+import FoldersPreview from './components/folders-preview/folders-preview';
+import Folders from './routes/folders/folders.route';
 
 
 
