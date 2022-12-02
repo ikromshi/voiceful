@@ -67,8 +67,33 @@ def populate_db():
     f2 = Folder(name="School", user_id=2)
     f3 = Folder(name="Places", user_id=3)
     f4 = Folder(name="Food", user_id=1)
-    db.session.add_all([f1, f2, f3, f4])
+    f5 = Folder(name="Folder1", user_id=1)
+    f6 = Folder(name="Folder2", user_id=1)
+    f7 = Folder(name="Folder3", user_id=1)
+    f8 = Folder(name="Folder4", user_id=1)
+    f9 = Folder(name="Folder5", user_id=1)
+    f10 = Folder(name="Folder6", user_id=1)
+    f11 = Folder(name="Folder7", user_id=1)
+    f12 = Folder(name="Folder8", user_id=1)
+    db.session.add_all([f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12])
     db.session.commit()
+
+    c1 = Button(name="Button1q", folder_id=1)
+    c2 = Button(name="Button1s", folder_id=1)
+    c3 = Button(name="Button1d", folder_id=1)
+    c4 = Button(name="Button1gs", folder_id=1)
+    c5 = Button(name="Button1g", folder_id=1)
+
+    d1 = Button(name="Button-d-1", folder_id=4)
+    d2 = Button(name="Button-d-wq", folder_id=4)
+    d3 = Button(name="Button-d-r", folder_id=4)
+    d4 = Button(name="Button-d-t", folder_id=4)
+    d5 = Button(name="Button-d-y", folder_id=4)
+    d6 = Button(name="Button-d-u", folder_id=4)
+    d7 = Button(name="Button-d-i", folder_id=4)
+    d8 = Button(name="Button-d-o", folder_id=4)
+    d9 = Button(name="Button-d-a", folder_id=4)
+    d10 = Button(name="Button-d-s", folder_id=4)
 
     b1 = Button(name="Arabella", folder_id=1)
     b2 = Button(name="Ikrom", folder_id=1)
@@ -80,7 +105,7 @@ def populate_db():
     b8 = Button(name="Ithaca", folder_id=3)
     b9 = Button(name="Chicken", folder_id=4)
     b10 = Button(name="Lasagna", folder_id=4)
-    db.session.add_all([b1, b2, b3, b4, b5, b6, b7, b8, b9, b10])
+    db.session.add_all([b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, c1, c2, c3, c4, c5, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10])
     db.session.commit()
     return ""
 
@@ -221,13 +246,12 @@ def folder_and_button_query(user, folder_list_in):
 
     for folder in folder_list_in:
         buttons = Button.query.filter_by(folder_id=folder.id).all()
-        return_folder = {}
+        return_folder = dict(id=folder.id, name=folder.name, user_id=user.id, buttons=[])
 
         for button in buttons:
             temp_button = dict(id=button.id, name=button.name, folder_id=button.folder_id)
+            return_folder["buttons"].append(temp_button)
         
-        return_folder = dict(id=folder.id, name=folder.name, user_id=user.id, buttons=[])
-        return_folder["buttons"].append(temp_button)
         return_folders_list.append(return_folder)
     
     return_folders_json["folders"] = return_folders_list
