@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FolderContext } from "../../contexts/folder.context";
 import "./folder.css";
 
@@ -25,7 +25,9 @@ const Folder = () => {
               </div>
       })}
       <div className="add-button">
-        <div className="add-button-plus">&#43;</div>
+        <Link to="new-file">
+          <div className="add-button-plus">&#43;</div>
+        </Link> 
       </div>
     </div>
   )

@@ -20,9 +20,11 @@ const FoldersPreview = () => {
         </Link>
         )
       })}
-      <div className="add-folder">
-        <div className="add-folder-plus">&#43;</div>
-      </div>
+      <Link to="/new-folder">
+        <div className="add-folder">
+            <div className="add-folder-plus">&#43;</div>
+        </div>
+      </Link> 
     </div>
   )
 }
