@@ -14,23 +14,8 @@ const Home = () => {
   const foldersAPI = "http://127.0.0.1:5000/get_folders";
   const localFoldersPath = "/db/folders.json";
 
-  const fetchFolders = async (url: string, user: UserType) => {
-    axios({method: "POST", url: url, data: {email: user?.email}})
-      .then((response) => {
-        const { folders } = response.data;
-        folders && setFolders(folders);
-        console.log(JSON.parse(response.data.data));
-      }).catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
-    });
-  }
-
   useEffect(() => {
-    currentUser !== null ? fetchFolders(foldersAPI, currentUser) : fetchFolders(localFoldersPath, currentUser);
+  currentUser !== null ? fetchFoldersFromAPI(foldersAPI, currentUser, "POST", setFolders) : fetchFoldersFromAPI(localFoldersPath, currentUser, "GET", setFolders);
   }, []);
 
   return (
@@ -42,5 +27,27 @@ const Home = () => {
     </Fragment>
   )
 }
+
+export const fetchFoldersFromAPI = async (url: string, user: UserType, httpMethod: string, setFolders: any) => {
+  axios({method: httpMethod, url: url, data: {email: user?.email}})
+    .then((response) => {
+      let folders = null;
+      if (httpMethod === "POST") {
+        const { folders } = JSON.parse(response.data.data);
+        folders && setFolders(folders);
+      } else {
+        const { folders } = response.data;
+        folders && setFolders(folders);
+        }
+      }
+    ).catch((error) => {
+      if (error.response) {
+        console.log(error.response);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+  });
+}
+
 
 export default Home;
