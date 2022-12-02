@@ -151,7 +151,7 @@ def create_token():
         return {"msg": "Invalid email or password"}, 401
 
     access_token = create_access_token(identity=email)
-    response = {"access_token": access_token, "email": user.email, "password": user.password, "name": user.name, "voice": user.voice}
+    response = {"access_token": access_token, "email": user.email, "password": user.password, "name": user.name, "voice": user.voice, "id": user.id}
     return response
 
 
