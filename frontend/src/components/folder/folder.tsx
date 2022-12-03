@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FolderContext } from "../../contexts/folder.context";
+import Button from "../button/button";
 import "./folder.css";
 
 const Folder = () => {
@@ -22,9 +23,7 @@ const Folder = () => {
   return (
     <div className="buttons-container">
       {buttons.map((button: any, idx: number) => {
-        return <div key={idx} className="button">
-                <div className="button-name" >{button.name.toUpperCase()}</div>
-              </div>
+        return <Button key={idx} button={button}/>
       })}
       <Link to="/new-button">
         <div className="add-button">

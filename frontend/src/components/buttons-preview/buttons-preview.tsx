@@ -9,7 +9,6 @@ const ButtonsPreview = () => {
 
   return (
     <div className="buttons-preview">
-      {folders && folders.map((folder: any, idx: number) => <Button key={idx} buttons={folder.buttons}/>)}
     </div>
   )
 }

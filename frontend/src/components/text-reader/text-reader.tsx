@@ -23,8 +23,8 @@ const TextReader = () => {
 }
 
 
-export const speak = (e: FormEvent<HTMLFormElement>, textValue: string) => {
-  e.preventDefault();
+export const speak = (e: FormEvent<HTMLFormElement> | null, textValue: string) => {
+  e && e.preventDefault();
 
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(textValue);
