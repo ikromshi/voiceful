@@ -1,8 +1,8 @@
 .text-reader {
-  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 .text-reader .input-dropdown {
   display: flex;

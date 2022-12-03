@@ -7,6 +7,7 @@ import SignUp from './routes/authentication/sign-up';
 import Folders from './routes/folders/folders.route';
 import NewFolder from './components/new-folder/new-folder';
 import NewButton from './new-button/new-button';
+import Donation from './routes/donatation/donation';
 
 
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="folders/*" element={<Folders />}/>
             <Route path="new-folder" element={<NewFolder />} />
             <Route path="new-button" element={<NewButton />} />
+            <Route path="donation" element={<Donation />} />
           </ Route>
         </Routes>
     </div>

@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { UserProvider } from './contexts/user.context';
 import { FolderProvider } from './contexts/folder.context';
+import { Elements } from '@stripe/react-stripe-js';
+import { StripePromise } from './utils/stripte.utils';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +15,9 @@ root.render(
   <BrowserRouter>
     <UserProvider>
       <FolderProvider>
-        <App />
+        <Elements stripe={StripePromise}>
+          <App />
+        </Elements>
       </FolderProvider>
     </UserProvider>
   </BrowserRouter>
