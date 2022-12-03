@@ -7,7 +7,6 @@ const Folder = () => {
   const { folder_name } = useParams();
   const { folders }: {folders: any} = useContext(FolderContext);
   const [buttons, setButtons] = useState([]);
-  console.log(buttons);
 
   useEffect(() => {
     folders.forEach((folder: any, idx: number) => {

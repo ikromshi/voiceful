@@ -5,8 +5,8 @@ import { UserContext } from "../../contexts/user.context";
 import "./sign-up-form.css";
 
 const SignUpForm = () => {
-  const { setCurrentUser } = useContext(UserContext);
-  const [signUpForm, setSignUpForm] = useState({email: "", password: "", name: "", voice: ""});
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [signUpForm, setSignUpForm] = useState({email: "", password: "", name: "", voice: "", id: currentUser ? currentUser.id : -1});
   const navigate = useNavigate();
 
   const signUp = async (event: FormEvent) => {
@@ -26,7 +26,7 @@ const SignUpForm = () => {
       }
     });
 
-    setSignUpForm(({email: "", password: "", name: "", voice: ""}))
+    setSignUpForm(({email: "", password: "", name: "", voice: "", id: currentUser ? currentUser.id : -1}))
   }
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {

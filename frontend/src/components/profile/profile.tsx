@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/user.context";
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const [profileForm, setProfileForm] = useState({email: "", password: "", name: "", voice: "", access_token: ""});
+  const [profileForm, setProfileForm] = useState({email: "", password: "", name: "", voice: "", access_token: "", id: currentUser ? currentUser.id : -1});
 
   useEffect(() => {
     if (currentUser !== null) {
