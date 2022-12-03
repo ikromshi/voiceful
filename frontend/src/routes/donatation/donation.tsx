@@ -1,9 +1,9 @@
-import PaymentForm from "../../components/payment-form/payment-form";
+import StripeContainer from "../../components/stripe-container/stripe-container";
 
 const Donation = () => {
   return (
     <div className="donation">
-      <PaymentForm />
+      <StripeContainer />
     </div>
   )
 }
