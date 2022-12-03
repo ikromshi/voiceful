@@ -40,6 +40,7 @@ const Navigation = () => {
               <div className="nav-link" onClick={logUserOut}><span>Log Out</span></div>
             </Fragment>
           }
+          <Link className="nav-link" to="donation">Donate</Link>
         </div>
       </div>
     <Outlet />

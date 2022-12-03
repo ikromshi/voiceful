@@ -6,9 +6,15 @@ import Button from "../button/button";
 const ButtonsPreview = () => {
   const state = useContext(FolderContext);
   const folders: any = state.folders;
+  console.log(folders);
 
   return (
     <div className="buttons-preview">
+      {folders && folders.map((folder: any) => {
+        return folder.buttons.map((button: any, idx: number) => {
+          return <Button key={idx} button={button} />
+        })
+      })}
     </div>
   )
 }
