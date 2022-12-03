@@ -31,7 +31,6 @@ const Home = () => {
 export const fetchFoldersFromAPI = async (url: string, user: UserType, httpMethod: string, setFolders: any) => {
   axios({method: httpMethod, url: url, data: {email: user?.email}})
     .then((response) => {
-      let folders = null;
       if (httpMethod === "POST") {
         const { folders } = JSON.parse(response.data.data);
         folders && setFolders(folders);
