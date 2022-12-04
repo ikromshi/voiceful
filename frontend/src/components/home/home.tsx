@@ -7,7 +7,6 @@ import ButtonsPreview from "../buttons-preview/buttons-preview";
 import { UserType } from "../../types/types";
 import Introduction from "../introduction/introduction";
 import { HomeButton, HomeButtonSvg, HomeLink, HomeLinkDiv, WelcomeMessage } from "./home.styles";
-import { HasAccount } from "../sign-in-form/sign-in-form.styles";
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
