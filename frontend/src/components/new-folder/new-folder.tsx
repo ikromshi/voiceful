@@ -1,16 +1,14 @@
+import axios from "axios";
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FolderContext } from "../../contexts/folder.context";
 import { UserContext } from "../../contexts/user.context";
 import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
-import { constructFolder } from "../../utils/constructor";
 import FormInput from "../form-input/form-input";
 import "./new-folder.css";
 
 const NewFolder = () => {
   const navigate = useNavigate();
   const [folderName, setFolderName] = useState("");
-  const { folders, addFolder } = useContext(FolderContext);
   const { currentUser } = useContext(UserContext);
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
@@ -18,9 +16,8 @@ const NewFolder = () => {
     setFolderName(value);
   }
 
-  const saveFolder = () => {
-    const newFolder = constructFolder(folderName, folders, currentUser);
-    addFolder(folders, newFolder);
+  const saveFolder = async() => {
+    saveFoldersInDB(folderName, currentUser!.email);
     navigate("/folders");
   }
 
@@ -40,5 +37,19 @@ const NewFolder = () => {
     </div>
   )
 }
+
+const saveFoldersInDB = (folderName: string, email: string) => {
+  axios({method: "POST", url: "http://127.0.0.1:5000/put_folders", data: {folder: folderName, email: email}})
+    .then((response) => {
+    }
+    ).catch((error) => {
+      if (error.response) {
+        console.log(error.response);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+  });
+}
+
 
 export default NewFolder;
