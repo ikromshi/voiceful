@@ -7,28 +7,31 @@
   padding: 50px 10px;
   margin: 15px;
   text-align: center;
-  border: 8px solid rgb(101, 142, 148);
+  border: 2px solid rgb(213, 184, 236);
+  color: white;
+  background-color: rgba(194, 141, 209, 0.505);
+  
 }
 .button:hover {
-  background-color: rgb(185, 214, 221);
+  background-color: rgb(143, 104, 159);
 }
 .button .button-speak {
   float: left;
   width: 15%;
   overflow: hidden;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .button .button-name{
   width: 70%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   float: left;
 }
 .button .button-edit {
   width: 15%;
   overflow: hidden;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .button .button-speak:hover, .button-edit:hover {
-  background-color: rgb(186, 236, 222);
+  background-color: rgb(166, 133, 179);
   cursor: pointer;
 }
