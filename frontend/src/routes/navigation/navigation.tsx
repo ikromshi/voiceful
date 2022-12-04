@@ -1,11 +1,16 @@
 import "./navigation.css";
 import axios from "axios";
 import { Fragment, useContext } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { FolderContext } from "../../contexts/folder.context";
+import { fetchFoldersFromAPI } from "../../components/home/home";
+import { ReactComponent as Logo } from "../../assets/microphone.svg";
+import { ReactComponent as Phrase } from "../../assets/phrase.svg";
 
 const Navigation = () => {
   const { currentUser, unsetCurrentUser } = useContext(UserContext);
+  const { setFolders } = useContext(FolderContext);
   const navigate = useNavigate();
 
   const logUserOut = () => {
@@ -15,6 +20,7 @@ const Navigation = () => {
         localStorage.removeItem("currentUser");
         localStorage.removeItem("folders");
         navigate("/");
+        fetchFoldersFromAPI("/db/folders.json", currentUser, "GET", setFolders);
       }).catch((error) => {
         if (error.response) {
           console.log(error.response);
@@ -27,19 +33,22 @@ const Navigation = () => {
   return (
     <Fragment>
       <div className="nav-container">
-        <h3>[Icon probably]</h3>
+        <Link to="/" className="logo-container">
+            <Logo className="logo"/>
+            <Phrase/>
+        </Link>
         <div className="nav-links">
-          <Link className="nav-link" to="/">Home</Link>
           {!currentUser ? 
             <Fragment>
-              <Link className="nav-link" to="/sign-in">Sign In</Link>
-              <Link className="nav-link" to="/sign-up">Sign Up</Link>
+              <Link className="nav-link" to="/sign-in">Sign in</Link>
+              <Link className="nav-link" to="/sign-up">Sign up</Link>
             </Fragment> :
             <Fragment>
               <Link className="nav-link" to="/profile">Profile</Link>
-              <div className="nav-link" onClick={logUserOut}><span>Log Out</span></div>
+              <div className="nav-link" onClick={logUserOut}><span>Sign out</span></div>
             </Fragment>
           }
+          <Link className="nav-link" to="donation">Donate</Link>
         </div>
       </div>
     <Outlet />

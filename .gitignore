@@ -2,6 +2,7 @@
 
 # dependencies
 /frontend/node_modules
+/frontend/stripe/node_modules
 /frontend/.pnp
 /frontend/.pnp.js
 
@@ -17,10 +18,14 @@
 /frontend/.env.development.local
 /frontend/.env.test.local
 /frontend/.env.production.local
+/frontend/stripe/.env
 
 /frontend/npm-debug.log*
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
+
+# .env
+/frontend/.env
 
 # backend
 /backend/db
@@ -32,3 +37,5 @@
 /backend/app.db
 /backend/config.py
 /backend/.idea
+# Local Netlify folder
+.netlify

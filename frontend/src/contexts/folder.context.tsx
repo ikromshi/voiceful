@@ -7,7 +7,7 @@ export const FolderContext = createContext({
   unsetFolders: () => {},
   addFolder: (folders: any, folder: any) => {},
   deleteFolder: (folders: any, folderName: string) => {},
-  addButton: (folders: any, folderID: number, button: any) => {},
+  addButton: (folders: any, button: any) => {},
   deleteButton: (folders: any, buttonName: string) => {}
 });
 
@@ -20,6 +20,8 @@ export const FolderReducer = (state: any, action: any) => {
     case FOLDER_ACTION_TYPES.UNSET_FOLDERS:
       return {...state, folders: null};
     case FOLDER_ACTION_TYPES.ADD_FOLDER:
+      return {...state, folders: payload};
+    case FOLDER_ACTION_TYPES.ADD_BUTTON:
       return {...state, folders: payload};
     default:
       throw new Error(`Unhandled type ${type} in FolderReducer`)
@@ -57,8 +59,8 @@ export const FolderProvider = ({ children } : {children: ReactElement}) => {
   }
 
   // need to provide a folder ID to add a button to the folder; need to construct a full button before calling this method;
-  const addButton = (folders: any, folderID: number, button: any) => {
-    const newFolders = addButtonToFolder(folders, folderID, button);
+  const addButton = (folders: any, button: any) => {
+    const newFolders = addButtonToFolder(folders, button);
     localStorage.setItem("folders", JSON.stringify(newFolders));
     dispatch({ type: FOLDER_ACTION_TYPES.ADD_BUTTON, payload: newFolders });
   }
@@ -90,15 +92,13 @@ function removeFolder(folders: any, folderName: string) {
   return newFolders;
 }
 
-function addButtonToFolder(folders: any, folderID: number, button: any) {
-  const newFolders: any[] = [];
-
+function addButtonToFolder(folders: any, button: any) {
   folders.forEach((folder: any) => {
-    if (folder.id === folderID) {
+    if (folder.id === button.folder_id) {
       folder.buttons.push(button);
     }
   });
-  return newFolders;
+  return folders;
 }
 
 function removeButtonFromFolder(folders: any, buttonName: string) {

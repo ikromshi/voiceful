@@ -12,6 +12,7 @@ export type BackendDataType = {
 };
 
 export type UserType = null | {
+  id: number;
   name: string;
   email: string;
   password: string;

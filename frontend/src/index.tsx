@@ -13,7 +13,7 @@ root.render(
   <BrowserRouter>
     <UserProvider>
       <FolderProvider>
-        <App />
+          <App />
       </FolderProvider>
     </UserProvider>
   </BrowserRouter>

@@ -7,6 +7,7 @@ import { FolderContext } from "../../contexts/folder.context";
 import ButtonsPreview from "../buttons-preview/buttons-preview";
 import { Link } from "react-router-dom";
 import { UserType } from "../../types/types";
+import Introduction from "../introduction/introduction";
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
@@ -15,11 +16,15 @@ const Home = () => {
   const localFoldersPath = "/db/folders.json";
 
   useEffect(() => {
-  currentUser !== null ? fetchFoldersFromAPI(foldersAPI, currentUser, "POST", setFolders) : fetchFoldersFromAPI(localFoldersPath, currentUser, "GET", setFolders);
+    currentUser !== null ? fetchFoldersFromAPI(foldersAPI, currentUser, "POST", setFolders) : fetchFoldersFromAPI(localFoldersPath, currentUser, "GET", setFolders);
   }, []);
 
   return (
     <Fragment>
+      {!currentUser ? 
+        <Introduction /> :
+        <></>
+      }
       <TextReader />
       {currentUser ? <Link to="/folders"><button>Conversation Buttons</button></Link> :
         <ButtonsPreview />
@@ -31,7 +36,6 @@ const Home = () => {
 export const fetchFoldersFromAPI = async (url: string, user: UserType, httpMethod: string, setFolders: any) => {
   axios({method: httpMethod, url: url, data: {email: user?.email}})
     .then((response) => {
-      let folders = null;
       if (httpMethod === "POST") {
         const { folders } = JSON.parse(response.data.data);
         folders && setFolders(folders);

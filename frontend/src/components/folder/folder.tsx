@@ -1,16 +1,19 @@
-import { Fragment, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { FolderContext } from "../../contexts/folder.context";
+import Button from "../button/button";
 import "./folder.css";
 
 const Folder = () => {
   const { folder_name } = useParams();
   const { folders }: {folders: any} = useContext(FolderContext);
   const [buttons, setButtons] = useState([]);
-  console.log(buttons);
+
+  localStorage.removeItem("folderName");
+  localStorage.setItem("folderName", folder_name as string);
 
   useEffect(() => {
-    folders.forEach((folder: any, idx: number) => {
+    folders.forEach((folder: any) => {
       if (folder.name === folder_name) {
         setButtons(folder.buttons);
       }
@@ -18,15 +21,15 @@ const Folder = () => {
   }, []);
 
   return (
-    <div className="folder-container">
+    <div className="buttons-container">
       {buttons.map((button: any, idx: number) => {
-        return <div key={idx} className="folder">
-                <div className="folder-name" >{button.name.toUpperCase()}</div>
-              </div>
+        return <Button key={idx} button={button}/>
       })}
-      <div className="add-button">
-        <div className="add-button-plus">&#43;</div>
-      </div>
+      <Link to="/new-button">
+        <div className="add-button">
+            <div className="add-button-plus">&#43;</div>
+        </div>
+      </Link> 
     </div>
   )
 }

@@ -1,8 +1,8 @@
 .text-reader {
-  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 .text-reader .input-dropdown {
   display: flex;
@@ -10,8 +10,10 @@
   
 }
 .text-reader .input-dropdown textarea {
-  width: 50rem;
-  height: 15rem;
+  background: transparent;
+  color: #ffff;
+  width: 60rem;
+  height: 20rem;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;

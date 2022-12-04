@@ -1,38 +1,37 @@
 import { FormEvent, useState } from "react";
-import VoiceSelector from "./voice-selector";
+import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
 import "./text-reader.css";
 
 const synth = window.speechSynthesis;
 
 const TextReader = () => {
   const [textValue, setTextValue] = useState<string>("");
-  const [selectedVoice, setSelectedVoice] = useState<number>(0);
 
   if (!synth) {
     return <span>Your browser does not support Speech Synthesis!</span>;
   }
 
-  const speak = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(textValue);
-    utterance.voice = synth.getVoices()[selectedVoice];
-
-    synth.speak(utterance);
-  }
-
   return (
     <div className="text-reader">
-      <form onSubmit={speak}>
+      <form onSubmit={(e) => {speak(e, textValue)}}>
         <div className="input-dropdown">
           <textarea placeholder="Enter your text:" value={textValue} onChange={e => setTextValue(e.target.value)}/>
-          <VoiceSelector selected={selectedVoice} setSelected={setSelectedVoice}/>
         </div>
-        <button type="submit">Speak!</button>
+        <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>Speak</Button>
       </form>
     </div>
   )
 }
+
+
+export const speak = (e: FormEvent<HTMLFormElement> | null, textValue: string) => {
+  e && e.preventDefault();
+
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(textValue);
+  utterance.voice = synth.getVoices()[0];    
+  synth.speak(utterance);
+}
+
 
 export default TextReader;

@@ -1,0 +1,16 @@
+.payment-form-div {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.payment-form-div .form-container {
+  color: white;
+  height: 100px;
+  min-width: 500px;
+}
+.payment-form-div .payment-success h1 {
+  margin: 7rem 0 3rem 0;
+  color: white;
+}
