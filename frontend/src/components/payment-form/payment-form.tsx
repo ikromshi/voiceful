@@ -13,6 +13,28 @@ const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const CARD_OPTIONS = {
+    style: {
+      base: {
+        color: "white",
+        fontWeight: "500",
+        fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+        fontSize: "20px",
+        fontSmoothing: "antialiased",
+        ":-webkit-autofill": {
+          color: "#fce883",
+        },
+        "::placeholder": {
+          color: "#D1D5DB",
+        },
+      },
+      invalid: {
+        iconColor: "#ef2961",
+        color: "#ef2961",
+      },
+    },
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!stripe || !elements) {
@@ -21,7 +43,7 @@ const PaymentForm = () => {
     setIsProcessingPayment(true);
     const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement)!
+      card: elements.getElement(CardElement)!,
     })
 
 
@@ -51,7 +73,7 @@ const PaymentForm = () => {
     {!paymentProcessed ? 
       <form className="form-container" onSubmit={handleSubmit}>
         <h1>Credit Card Payment: </h1>
-        <CardElement/>
+        <CardElement options={CARD_OPTIONS}/>
         <Button isLoading={isProcessingPayment} buttonType={BUTTON_TYPE_CLASSES.inverted}>Pay $10</Button>
       </form>
     :
