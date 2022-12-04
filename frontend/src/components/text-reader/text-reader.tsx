@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
 import "./text-reader.css";
 
 const synth = window.speechSynthesis;
@@ -16,7 +17,7 @@ const TextReader = () => {
         <div className="input-dropdown">
           <textarea placeholder="Enter your text:" value={textValue} onChange={e => setTextValue(e.target.value)}/>
         </div>
-        <button type="submit">Speak!</button>
+        <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>Speak</Button>
       </form>
     </div>
   )

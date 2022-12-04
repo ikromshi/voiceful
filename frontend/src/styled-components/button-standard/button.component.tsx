@@ -5,13 +5,14 @@
  * 3) google sign-in
  */
 
- import { BaseButton, InvertedButton, ButtonSpinner, GoogleSignInButton } from "./button.styles";
+ import { BaseButton, InvertedButton, ButtonSpinner, GoogleSignInButton, TextReaderButton } from "./button.styles";
  import { ButtonHTMLAttributes, FC } from "react";
  
  export enum BUTTON_TYPE_CLASSES {
      base = "base",
      google = "google-sign-in",
      inverted = "inverted",
+     textReader = "text-reader"
  };
  
  
@@ -19,6 +20,7 @@
      [BUTTON_TYPE_CLASSES.base]: BaseButton,
      [BUTTON_TYPE_CLASSES.google]: GoogleSignInButton,
      [BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
+     [BUTTON_TYPE_CLASSES.textReader]: TextReaderButton,
  }[buttonType]);
  
  export type ButtonProps = {

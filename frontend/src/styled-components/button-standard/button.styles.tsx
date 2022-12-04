@@ -12,7 +12,6 @@ export const BaseButton = styled.button`
   background-color: black;
   color: white;
   text-transform: uppercase;
-  font-family: "Open Sans Condensed";
   font-weight: bolder;
   border: none;
   cursor: pointer;
@@ -49,6 +48,11 @@ export const InvertedButton = styled(BaseButton)`
   margin-left: auto;
   margin-top: 30px;
   `;
+
+export const TextReaderButton = styled(BaseButton)`
+  background-color: bisque;
+  color: bisque;
+`
 
 export const ButtonSpinner = styled(SpinnerContainer)`
   width: 30px;
