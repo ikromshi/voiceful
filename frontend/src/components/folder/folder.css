@@ -4,13 +4,14 @@
   height: auto;
   min-height: 150%;
   display: inline-block;
-  padding: 50px;
+  padding: 50px 10px;
   margin: 15px;
   text-align: center;
-  border: 8px solid rgb(101, 142, 148);
+  border: 2px solid white;
+  color: white;
 }
 .buttons-container .add-button:hover {
-  background-color: rgb(185, 214, 221);
+  border: 2px solid #8fc1e5;
 }
 .buttons-container .add-button .add-button-plus {
   overflow: hidden;

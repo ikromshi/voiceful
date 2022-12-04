@@ -53,3 +53,6 @@
   width: 70px;
   margin-right: 2rem;
 }
+#log-out {
+  cursor: pointer;
+}

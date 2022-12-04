@@ -1,7 +1,10 @@
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../components/form-input/form-input";
 import { FolderContext } from "../contexts/folder.context";
+import Button, { BUTTON_TYPE_CLASSES } from "../styled-components/button-standard/button.component";
 import { constructButton } from "../utils/constructor";
+import "./new-button.css";
 
 const NewButton = () => {
   const navigate = useNavigate();
@@ -21,16 +24,15 @@ const NewButton = () => {
 
   return (
     <div className="new-button">
-      <h3>Create a button</h3>
       <form className="new-button-form">
-        <input 
+        <FormInput 
           type="text" 
           onChange={handleChange}
-          placeholder="Button Name: "
+          label="Button Name: "
           name='new-button'
           value={buttonName}
         />
-        <button type="button" onClick={saveButton}>Save Button</button>
+        <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={saveButton}>Save Button</Button>
       </form>
     </div>
   )
