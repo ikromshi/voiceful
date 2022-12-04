@@ -10,6 +10,8 @@
   
 }
 .text-reader .input-dropdown textarea {
+  background: transparent;
+  color: #ffff;
   width: 50rem;
   height: 15rem;
   padding: 12px 20px;
