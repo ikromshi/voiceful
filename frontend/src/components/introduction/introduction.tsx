@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "./introduction.css";
 
 const Introduction = () => {
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const wordsToRotate = ["Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, nulla dolores, reiciendis voluptatum distinctio aliquid deleniti iusto molestiae similique blanditiis repellat quisquam. Cumque dolorem, reprehenderit maxime asperiores dicta maiores recusandae?"];
+  const [loopNum] = useState(0);
+  const [isDeleting] = useState(false);
+  const wordsToRotate = ["Speak your mind by entering your thoughts into the text box and pressing the “Speak” button for it to be read aloud or use our automatically generated buttons to read our some  or sign in to create your own personalized buttons."];
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(20)
   const period = 2000;

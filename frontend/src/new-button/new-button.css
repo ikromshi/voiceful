@@ -1,10 +1,10 @@
-.new-folder {
+.new-button {
   padding-top: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
 }
-.new-folder-form {
+.new-button-form {
   width: 360px;
 }

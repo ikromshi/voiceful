@@ -45,7 +45,7 @@ const Navigation = () => {
             </Fragment> :
             <Fragment>
               <Link className="nav-link" to="/profile">Profile</Link>
-              <div className="nav-link" onClick={logUserOut}><span>Sign out</span></div>
+              <div className="nav-link" id="log-out" onClick={logUserOut}><span>Sign out</span></div>
             </Fragment>
           }
           <Link className="nav-link" to="donation">Donate</Link>

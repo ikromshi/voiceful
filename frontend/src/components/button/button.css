@@ -7,11 +7,12 @@
   padding: 50px 10px;
   margin: 15px;
   text-align: center;
-  border: 2px solid rgb(213, 184, 236);
+  border: 2px solid white;
   color: white;
 }
 .button:hover {
-  background-color: rgba(194, 141, 209, 0.505);
+  border: 2px solid #8fc1e5;
+
 }
 .button .button-speak {
   float: left;
@@ -29,6 +30,8 @@
   overflow: hidden;
 }
 .button .button-speak:hover, .button-edit:hover {
-  background-color: rgb(143, 104, 159);
+  /* background-color: rgb(143, 104, 159); */
   cursor: pointer;
+  text-decoration: underline;
+  border: 2px solid rgba(0, 0, 0, 0.527);
 }

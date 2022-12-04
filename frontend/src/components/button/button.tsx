@@ -1,7 +1,7 @@
 import { speak } from "../text-reader/text-reader";
 import "./button.css";
-import { ReactComponent as Pencil } from "../../assets/pencil.svg";
-import { ReactComponent as Volume } from "../../assets/volume.svg";
+import { ReactComponent as Pencil } from "../../assets/pencil3.svg";
+import { ReactComponent as Volume } from "../../assets/volume2.svg";
 
 const Button = ({button}: {button: any} ) => {
   

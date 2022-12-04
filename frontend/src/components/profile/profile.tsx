@@ -69,13 +69,6 @@ const Profile = () => {
               placeholder="Name:"
               value={profileForm.name}
               />
-            <FormInput type="voice" 
-              label=""
-              onChange={handleChange}
-              name="voice"
-              placeholder="Select voice*:"
-              value={profileForm.voice}
-              />
             <Button onClick={saveData} buttonType={BUTTON_TYPE_CLASSES.inverted}>
               <span>Save</span>
             </Button>

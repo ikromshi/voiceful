@@ -2,7 +2,10 @@ import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FolderContext } from "../../contexts/folder.context";
 import { UserContext } from "../../contexts/user.context";
+import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
 import { constructFolder } from "../../utils/constructor";
+import FormInput from "../form-input/form-input";
+import "./new-folder.css";
 
 const NewFolder = () => {
   const navigate = useNavigate();
@@ -24,16 +27,15 @@ const NewFolder = () => {
 
   return (
     <div className="new-folder">
-      <h3>Create a folder</h3>
       <form className="new-folder-form">
-        <input 
+        <FormInput
+          label="Folder Name" 
           type="text" 
           onChange={handleChange}
-          placeholder="Folder Name: "
           name='new-folder'
           value={folderName}
         />
-        <button type="button" onClick={saveFolder}>Save Folder</button>
+        <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={saveFolder}>Save Folder</Button>
       </form>
     </div>
   )
