@@ -15,7 +15,7 @@ const Home = () => {
   const localFoldersPath = "/db/folders.json";
 
   useEffect(() => {
-  currentUser !== null ? fetchFoldersFromAPI(foldersAPI, currentUser, "POST", setFolders) : fetchFoldersFromAPI(localFoldersPath, currentUser, "GET", setFolders);
+    currentUser !== null ? fetchFoldersFromAPI(foldersAPI, currentUser, "POST", setFolders) : fetchFoldersFromAPI(localFoldersPath, currentUser, "GET", setFolders);
   }, []);
 
   return (

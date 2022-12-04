@@ -3,9 +3,12 @@ import axios from "axios";
 import { Fragment, useContext } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
+import { fetchFoldersFromAPI } from "../../components/home/home";
+import { FolderContext } from "../../contexts/folder.context";
 
 const Navigation = () => {
   const { currentUser, unsetCurrentUser } = useContext(UserContext);
+  const { setFolders } = useContext(FolderContext);
   const navigate = useNavigate();
 
   const logUserOut = () => {
@@ -15,6 +18,7 @@ const Navigation = () => {
         localStorage.removeItem("currentUser");
         localStorage.removeItem("folders");
         navigate("/");
+        fetchFoldersFromAPI("/db/folders.json", currentUser, "GET", setFolders);
       }).catch((error) => {
         if (error.response) {
           console.log(error.response);

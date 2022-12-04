@@ -6,7 +6,6 @@ import Button from "../button/button";
 const ButtonsPreview = () => {
   const state = useContext(FolderContext);
   const folders: any = state.folders;
-  console.log(folders);
 
   return (
     <div className="buttons-preview">
