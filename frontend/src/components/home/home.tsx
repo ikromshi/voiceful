@@ -7,6 +7,7 @@ import { FolderContext } from "../../contexts/folder.context";
 import ButtonsPreview from "../buttons-preview/buttons-preview";
 import { Link } from "react-router-dom";
 import { UserType } from "../../types/types";
+import Introduction from "../introduction/introduction";
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
@@ -20,6 +21,10 @@ const Home = () => {
 
   return (
     <Fragment>
+      {!currentUser ? 
+        <Introduction /> :
+        <></>
+      }
       <TextReader />
       {currentUser ? <Link to="/folders"><button>Conversation Buttons</button></Link> :
         <ButtonsPreview />
