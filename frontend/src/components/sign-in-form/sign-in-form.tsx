@@ -2,7 +2,10 @@ import axios from "axios";
 import { FormEvent, useState, useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
-import "./sign-in-form.css";
+import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
+import FormInput from "../form-input/form-input";
+import { ButtonsContainer, HasAccount, SignUpContainer } from "./sign-in-form.styles";
+import "./sign-in-form.styles.tsx";
 
 const SignInForm = () => {
   const { setCurrentUser } = useContext(UserContext);
@@ -33,24 +36,29 @@ const SignInForm = () => {
   }
 
   return (
-    <div>
-      <h3>SignIn</h3>
-      <form className="sign-in">
-        <input 
-          type="email"
-          onChange={handleChange} 
-          placeholder="Email:"
-          name="email"
-          value={signInForm.email}/>
-        <input type="password" 
-          onChange={handleChange}
-          name="password"
-          placeholder="Password:"
-          value={signInForm.password}
-          />
-        <button onClick={logUserIn}>Sign in</button>
-      </form>
-    </div>
+    <SignUpContainer>
+        <HasAccount>Already have an account?</HasAccount>
+        <span>Sign in with your email and password</span>
+        <form onSubmit={logUserIn}>
+            <FormInput 
+                label="Email"
+                type="email" 
+                required name="email" 
+                onChange={handleChange} 
+                value={signInForm.email}
+            />
+            <FormInput 
+                label="Password"
+                type="password" 
+                required name="password" 
+                onChange={handleChange} 
+                value={signInForm.password}
+            />
+            <ButtonsContainer>
+                <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>Sign-in</Button>
+            </ButtonsContainer>
+        </form>
+    </SignUpContainer>
   )
 }
 
