@@ -1,13 +1,13 @@
-import "./home.css";
 import axios from "axios";
 import { Fragment, useContext, useEffect } from "react";
 import TextReader from "../text-reader/text-reader";
 import { UserContext } from "../../contexts/user.context";
 import { FolderContext } from "../../contexts/folder.context";
 import ButtonsPreview from "../buttons-preview/buttons-preview";
-import { Link } from "react-router-dom";
 import { UserType } from "../../types/types";
 import Introduction from "../introduction/introduction";
+import { HomeButton, HomeButtonSvg, HomeLink, HomeLinkDiv, WelcomeMessage } from "./home.styles";
+import { HasAccount } from "../sign-in-form/sign-in-form.styles";
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
@@ -23,11 +23,21 @@ const Home = () => {
     <Fragment>
       {!currentUser ? 
         <Introduction /> :
-        <></>
+        <>
+          <WelcomeMessage>Welcome back, {currentUser.name}!</WelcomeMessage>
+          <HomeLinkDiv>
+            <HomeLink to="/folders">
+              <HomeButton>
+                Go to your conversation buttons <HomeButtonSvg />
+              </HomeButton>
+            </HomeLink>
+          </HomeLinkDiv>
+        </>
       }
       <TextReader />
-      {currentUser ? <Link to="/folders"><button>Conversation Buttons</button></Link> :
-        <ButtonsPreview />
+      {! currentUser ? 
+        <ButtonsPreview /> :
+        <></>
       }
     </Fragment>
   )
