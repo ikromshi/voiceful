@@ -2,22 +2,23 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useState } from "react";
 import { FormEvent } from "react";
+import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
 import "./payment-form.css";
 
 
 const PaymentForm = () => {
-  const [success, setSuccess ] = useState(false)
-  const stripe = useStripe()
-  const elements = useElements()
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentProcessed, setPaymentProcessed] = useState(false);
 
-    
+  const stripe = useStripe();
+  const elements = useElements();
 
   const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
     if (!stripe || !elements) {
-      console.log("errprrreonewknefe");
       return;
     }
-    e.preventDefault()
+    setIsProcessingPayment(true);
     const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement)!
@@ -31,12 +32,12 @@ const PaymentForm = () => {
           amount: 1000,
           id
         });
+        setIsProcessingPayment(false);
 
         if(response.data.success) {
-          console.log("Successful payment")
-          setSuccess(true)
+          console.log("Successful payment");
+          setPaymentProcessed(true);
         }
-
       } catch (error) {
         console.log("Error", error);
       }
@@ -47,16 +48,16 @@ const PaymentForm = () => {
 
   return (
     <div className="payment-form-div">
-    {!success ? 
+    {!paymentProcessed ? 
       <form className="form-container" onSubmit={handleSubmit}>
         <h1>Credit Card Payment: </h1>
         <CardElement/>
-        <button className="payment-button">Pay</button>
+        <Button isLoading={isProcessingPayment} buttonType={BUTTON_TYPE_CLASSES.inverted}>Pay $10</Button>
       </form>
     :
     <div className="payment-success">
       <h1>Payment Successful.</h1>
-      <h2>Thanks for shopping with us!</h2>
+      <h2>Thank you for your donation!</h2>
     </div> 
     }
     </div>
