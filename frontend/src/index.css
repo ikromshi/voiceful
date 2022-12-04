@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 20px 40px;
-
+  background-image: url("/src/assets/banner-bg.png");
 
   @media screen and (max-width: 800px) {
     padding: 10px;
@@ -10,17 +10,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-a {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-}
-
 * {
   box-sizing: border-box;
 }
