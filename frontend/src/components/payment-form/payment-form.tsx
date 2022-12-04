@@ -70,6 +70,7 @@ const PaymentForm = () => {
 
   return (
     <div className="payment-form-div">
+    <h3>Consider donating $10 to help us grow this project</h3>
     {!paymentProcessed ? 
       <form className="form-container" onSubmit={handleSubmit}>
         <h1>Credit Card Payment: </h1>

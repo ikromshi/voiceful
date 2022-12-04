@@ -1,6 +1,9 @@
 import axios from "axios";
 import { FormEvent, useContext, useEffect, useState } from "react"
 import { UserContext } from "../../contexts/user.context";
+import Button, { BUTTON_TYPE_CLASSES } from "../../styled-components/button-standard/button.component";
+import FormInput from "../form-input/form-input";
+import { HasAccount, SignUpContainer } from "../sign-in-form/sign-in-form.styles";
 
 const Profile = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -19,7 +22,6 @@ const Profile = () => {
 
     axios({method: "POST", url: "http://127.0.0.1:5000/profile", headers: {Authorization: "Bearer " + profileForm.access_token}, data:profileForm})
       .then((response) => {
-        console.log(response.data);
       }).catch((error) => {
         if (error.response) {
           console.log(error.response);
@@ -35,48 +37,52 @@ const Profile = () => {
     }
 
   return (
-    <div className="profile">
-      <div className="pfp-div"></div>
+    <SignUpContainer className="profile">
       <div className="pfofile-data-div">
 
         <div className="header-div">
-          <h2>Your Profile</h2>
-          <h4>Add information about yourself</h4>
+          <HasAccount>Your Profile</HasAccount>
+          <span>Add information about yourself</span>
         </div>
 
         <div className="form-div">
           <form>
-            <input 
+            <FormInput 
               type="email"
               onChange={handleChange} 
               placeholder="Email:"
               name="email"
-              value={profileForm.email}/>
-            <input type="password" 
+              value={profileForm.email}
+              label=""
+              />
+            <FormInput type="password" 
+              label=""
               onChange={handleChange}
               name="password"
               placeholder="Password:"
               value={profileForm.password}
               />
-            <input type="name" 
+            <FormInput type="name" 
+              label=""
               onChange={handleChange}
               name="name"
               placeholder="Name:"
               value={profileForm.name}
               />
-            <input type="voice" 
+            <FormInput type="voice" 
+              label=""
               onChange={handleChange}
               name="voice"
               placeholder="Select voice*:"
               value={profileForm.voice}
               />
-            <button onClick={saveData}>
+            <Button onClick={saveData} buttonType={BUTTON_TYPE_CLASSES.inverted}>
               <span>Save</span>
-            </button>
+            </Button>
           </form>
         </div>
       </div>
-    </div>
+    </SignUpContainer>
   )
 }
 

@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 20px 40px;
-  background-image: url("/src/assets/banner-bg.png");
+  /* background-image: url("/src/assets/banner-bg.png"); */
+  background-color: black;
 
   @media screen and (max-width: 800px) {
     padding: 10px;
@@ -15,4 +16,8 @@ code {
 }
 * {
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }
