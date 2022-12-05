@@ -22,12 +22,12 @@
         },
         {
           "id": 4,
-          "name": "The weather is nice today",
+          "name": "Let's hang out",
           "folder_id": 1
         },
         {
           "id": 5,
-          "name": "Let's hang out",
+          "name": "The weather is nice today",
           "folder_id": 1
         }
       ]
@@ -46,43 +46,6 @@
           "id": 2,
           "name": "I like your outfit",
           "folder_id": 2
-        },
-        {
-          "id": 3,
-          "name": "",
-          "folder_id": 2
-        }
-      ]
-    },
-    {
-      "id": 3, 
-      "name": "Places",
-      "user_id": 1,
-      "buttons": [
-        {
-          "id": 1,
-          "name": "School",
-          "folder_id": 3
-        },
-        {
-          "id": 2,
-          "name": "Home",
-          "folder_id": 3
-        },
-        {
-          "id": 3,
-          "name": "Bar",
-          "folder_id": 3
-        },
-        {
-          "id": 4,
-          "name": "Wendy's",
-          "folder_id": 3
-        },
-        {
-          "id": 5,
-          "name": "Ithaca",
-          "folder_id": 3
         }
       ]
     }

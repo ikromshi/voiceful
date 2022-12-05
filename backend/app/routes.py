@@ -237,6 +237,15 @@ def button():
     else:
         return {"msg": "Method type not found"}
 
+@app.route('/delete_buttons', methods=['POST'])
+def delete_buttons():
+    buttonId = request.json.get("button_id", None)
+    buttonToDelete = Button.query.filter_by(id=buttonId).first()
+    db.session.delete(buttonToDelete)
+    db.session.commit()
+    return {"msg": "Button deleted"}, 200
+
+
 # constructs and returns a standard dictionary of folders with buttons
 def folder_and_button_query(user, folder_list_in):
     return_folders_json = {}
