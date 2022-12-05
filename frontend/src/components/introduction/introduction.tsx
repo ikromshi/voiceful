@@ -6,8 +6,7 @@ const Introduction = () => {
   const [isDeleting] = useState(false);
   const wordsToRotate = ["Speak your mind by entering your thoughts into the text box and pressing the “Speak” button for it to be read aloud or use our automatically generated buttons to read our some  or sign in to create your own personalized buttons."];
   const [text, setText] = useState("");
-  const [delta, setDelta] = useState(20)
-  const period = 2000;
+  const [delta] = useState(20)
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -15,7 +14,7 @@ const Introduction = () => {
     }, delta);
 
     return () => { clearInterval(ticker)};
-  }, [text]);
+  }, [text, delta]);
 
   const tick = () => {
     let i = loopNum % wordsToRotate.length;

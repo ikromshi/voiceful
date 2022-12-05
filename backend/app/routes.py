@@ -224,9 +224,8 @@ def add_folder():
 def button():
     if request.method == 'POST':
         buttonCollected = request.json.get("button", None)
-        folder = request.json.get("folder", None)
-        folderFound = Folder.query.filter_by(name=folder).first()
-        newButton = Button(name=buttonCollected, folder_id=folderFound.id)
+        folderId = request.json.get("folder", None)
+        newButton = Button(name=buttonCollected, folder_id=folderId)
         db.session.add(newButton)
         db.session.commit()
         return {"msg": "New button created"}, 200

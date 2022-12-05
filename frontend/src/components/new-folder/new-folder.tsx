@@ -16,8 +16,9 @@ const NewFolder = () => {
     setFolderName(value);
   }
 
-  const saveFolder = async() => {
-    saveFoldersInDB(folderName, currentUser!.email);
+  const saveFolder = async () => {
+    /// redirect issue;
+    await saveFoldersInDB(folderName, currentUser!.email);
     navigate("/folders");
   }
 
@@ -38,8 +39,8 @@ const NewFolder = () => {
   )
 }
 
-const saveFoldersInDB = (folderName: string, email: string) => {
-  axios({method: "POST", url: "http://127.0.0.1:5000/put_folders", data: {folder: folderName, email: email}})
+const saveFoldersInDB = async (folderName: string, email: string) => {
+  await axios({method: "POST", url: "http://127.0.0.1:5000/put_folders", data: {folder: folderName, email: email}})
     .then((response) => {
     }
     ).catch((error) => {

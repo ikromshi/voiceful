@@ -6,7 +6,7 @@ import SignIn from './routes/authentication/sign-in';
 import SignUp from './routes/authentication/sign-up';
 import Folders from './routes/folders/folders.route';
 import NewFolder from './components/new-folder/new-folder';
-import NewButton from './new-button/new-button';
+import NewButton from './components/new-button/new-button';
 import Donation from './routes/donatation/donation';
 
 
