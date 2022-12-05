@@ -12,17 +12,17 @@
         },
         {
           "id": 2,
-          "name": "Book",
+          "name": "Very nice to meet you",
           "folder_id": 1
         },
         {
           "id": 3,
-          "name": "Pencil",
+          "name": "What's your name?",
           "folder_id": 1
         },
         {
           "id": 4,
-          "name": "What's your name?",
+          "name": "The weather is nice today",
           "folder_id": 1
         },
         {
@@ -39,17 +39,17 @@
       "buttons": [
         {
           "id": 1,
-          "name": "What's for dinner?",
+          "name": "Let's grab a drink",
           "folder_id": 2
         },
         {
           "id": 2,
-          "name": "I'm hungry",
+          "name": "I like your outfit",
           "folder_id": 2
         },
         {
           "id": 3,
-          "name": "I like burgers",
+          "name": "",
           "folder_id": 2
         }
       ]
