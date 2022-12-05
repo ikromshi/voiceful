@@ -217,7 +217,7 @@ def add_folder():
     nFolder = Folder(name=folder, user_id=user.id)
     db.session.add(nFolder)
     db.session.commit()
-    return {"msg": "New folder created"}, 200 
+    return {"msg": "New folder created"}, 200
 
 
 @app.route('/buttons', methods=['GET', 'POST'])
