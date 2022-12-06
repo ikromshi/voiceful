@@ -8,7 +8,7 @@ export const FolderContext = createContext({
   addFolder: (folders: any, folder: any) => {},
   deleteFolder: (folders: any, folderName: string) => {},
   addButton: (folders: any, button: any) => {},
-  deleteButton: (folders: any, buttonName: string) => {}
+  deleteButton: (folders: any, buttonId: number) => {}
 });
 
 export const FolderReducer = (state: any, action: any) => {
@@ -22,6 +22,8 @@ export const FolderReducer = (state: any, action: any) => {
     case FOLDER_ACTION_TYPES.ADD_FOLDER:
       return {...state, folders: payload};
     case FOLDER_ACTION_TYPES.ADD_BUTTON:
+      return {...state, folders: payload};
+    case FOLDER_ACTION_TYPES.DELETE_BUTTON:
       return {...state, folders: payload};
     default:
       throw new Error(`Unhandled type ${type} in FolderReducer`)
@@ -65,8 +67,8 @@ export const FolderProvider = ({ children } : {children: ReactElement}) => {
     dispatch({ type: FOLDER_ACTION_TYPES.ADD_BUTTON, payload: newFolders });
   }
 
-  const deleteButton = (folders: any, buttonName: string) => {
-    const newFolders = removeButtonFromFolder(folders, buttonName);
+  const deleteButton = (folders: any, buttonId: number) => {
+    const newFolders = removeButtonFromFolder(folders, buttonId);
     localStorage.setItem("folders", JSON.stringify(newFolders));
     dispatch({ type: FOLDER_ACTION_TYPES.DELETE_BUTTON, payload: newFolders });
   }
@@ -101,18 +103,29 @@ function addButtonToFolder(folders: any, button: any) {
   return folders;
 }
 
-function removeButtonFromFolder(folders: any, buttonName: string) {
+function removeButtonFromFolder(foldersArray: any, buttonId: number) {
+  
   const newFolders: any = [];
 
-  folders.forEeach((folder: any) => {
+  // Use Object.keys() to get an array of the keys in the object
+  const keys = Object.keys(foldersArray);
+
+  // Iterate over the keys and create a new array of folders
+  keys.forEach((key) => {
+    const folder = foldersArray[key];
     const newButtons: any[] = [];
+
+    // Iterate over the buttons in the current folder and
+    // create a new array with the specified button removed
     folder.buttons.forEach((button: any) => {
-      if (button.name !== buttonName) {
+      if (button.id !== buttonId) {
         newButtons.push(button);
       }
     });
+
     folder.buttons = newButtons;
-    newFolders.add(folder);
+    newFolders.push(folder);
   });
+
   return newFolders;
 }
