@@ -4,7 +4,7 @@ import TextReader from "../text-reader/text-reader";
 import { UserContext } from "../../contexts/user.context";
 import { FolderContext } from "../../contexts/folder.context";
 import ButtonsPreview from "../buttons-preview/buttons-preview";
-import { UserType } from "../../types/types";
+import { FolderType, UserType } from "../../types/types";
 import Introduction from "../introduction/introduction";
 import { HomeButton, HomeButtonSvg, HomeLink, HomeLinkDiv, WelcomeMessage } from "./home.styles";
 

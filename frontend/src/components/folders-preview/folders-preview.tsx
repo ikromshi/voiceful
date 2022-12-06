@@ -4,10 +4,11 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchFoldersFromAPI } from "../home/home";
 import { UserContext } from "../../contexts/user.context";
+import { FolderType } from "../../types/types";
 
 const FoldersPreview = () => {
   const state = useContext(FolderContext);
-  const folders: any = state.folders;
+  const folders: Array<FolderType> = state.folders!;
   const { currentUser } = useContext(UserContext);
   const { setFolders } = useContext(FolderContext);
     console.log(folders);
@@ -21,7 +22,7 @@ const FoldersPreview = () => {
 
   return (
     <div className="folders-preview">
-      {folders?.map((folder: any, idx: number) => {
+      {folders?.map((folder: FolderType, idx: number) => {
         return (
         <Link key={idx} to={folder.name}>
           <div className="folder-name-container">

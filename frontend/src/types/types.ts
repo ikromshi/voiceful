@@ -34,3 +34,34 @@ export type UserContextType = {
   unsetCurrentUser: () => void;
   currentUser: UserType;
 }
+
+export type FolderType = {
+  id: number,
+  name: string,
+  user_id: number,
+  buttons: Array<ButtonType>
+}
+
+export type ButtonType = {
+  id: number,
+  name: string,
+  folder_id: number,
+}
+
+export type FolderContextType = {
+  folders: null | Array<FolderType>;
+  setFolders: (folders: Array<FolderType>) => void,
+  unsetFolders: () => void,
+  addFolder: (folders: Array<FolderType>, folder: FolderType) => void,
+  deleteFolder: (folders: Array<FolderType>, folderName: string) => void,
+  addButton: (folders: Array<FolderType>, button: ButtonType) => void,
+  deleteButton: (folders: Array<FolderType>, buttonId: number) => void}
+
+export type FolderStateType = {
+  folders: Array<FolderType>;
+}
+
+export type FolderActionType = {
+  type: string;
+  payload: Array<FolderType>;
+}

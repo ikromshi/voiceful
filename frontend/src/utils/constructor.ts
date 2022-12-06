@@ -1,6 +1,6 @@
-import { UserType } from "../types/types";
+import { FolderType, UserType } from "../types/types";
 
-export const constructFolder = (folderName: string, folders: any, currentUser: UserType) => {  
+export const constructFolder = (folderName: string, folders: Array<FolderType>, currentUser: UserType) => {  
   const newFolderId = folders.length && folders[folders.length-1]["id"] + 1;
   
   const newFolder = {
@@ -12,7 +12,7 @@ export const constructFolder = (folderName: string, folders: any, currentUser: U
   return newFolder;
 }
 
-export const constructButton = (buttonName: string, folders: any) => {
+export const constructButton = (buttonName: string, folders: Array<FolderType>) => {
   const folderName = localStorage.getItem("folderName");
   let folderOfButton: any = null;
   let buttonID = 0;

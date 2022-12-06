@@ -6,8 +6,9 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 import axios from "axios";
 import { FolderContext } from "../../contexts/folder.context";
+import { ButtonType } from "../../types/types";
 
-const Button = ({button}: {button: any} ) => {
+const Button = ({button}: {button: ButtonType} ) => {
   const { currentUser } = useContext(UserContext);
   const { deleteButton } = useContext(FolderContext);
 

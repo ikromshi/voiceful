@@ -18,7 +18,7 @@ const NewButton = () => {
   }
 
   const saveButton = async () => {
-    const newButton = constructButton(buttonName, folders);
+    const newButton = constructButton(buttonName, folders!);
     await saveButtonsInDB(buttonName, newButton.folder_id);
     navigate(`/folders/${localStorage.getItem("folderName")}`);
   }

@@ -1,17 +1,18 @@
 import { createContext, ReactElement, useReducer } from "react";
+import { ButtonType, FolderActionType, FolderContextType, FolderStateType, FolderType } from "../types/types";
 import { FOLDER_ACTION_TYPES } from "../utils/actionTypes";
 
-export const FolderContext = createContext({
+export const FolderContext = createContext<FolderContextType>({
   folders: null,
-  setFolders: (folders: any) => {},
+  setFolders: () => {},
   unsetFolders: () => {},
-  addFolder: (folders: any, folder: any) => {},
-  deleteFolder: (folders: any, folderName: string) => {},
-  addButton: (folders: any, button: any) => {},
-  deleteButton: (folders: any, buttonId: number) => {}
+  addFolder: () => {},
+  deleteFolder: () => {},
+  addButton: () => {},
+  deleteButton: () => {}
 });
 
-export const FolderReducer = (state: any, action: any) => {
+export const FolderReducer = (state: FolderStateType, action: any) => {
   const { type, payload } = action;
 
   switch (type){
@@ -37,7 +38,7 @@ const INITIAL_STATE = {
 export const FolderProvider = ({ children } : {children: ReactElement}) => {
   const [ state, dispatch ] = useReducer(FolderReducer, INITIAL_STATE);
 
-  const setFolders = (folders: any) => {
+  const setFolders = (folders: Array<FolderType>) => {
     localStorage.setItem("folders", JSON.stringify(folders));
     dispatch({ type: FOLDER_ACTION_TYPES.SET_FOLDERS, payload: folders });
   };
@@ -48,26 +49,26 @@ export const FolderProvider = ({ children } : {children: ReactElement}) => {
   }
 
   // need to construc a full folder before calling this method;
-  const addFolder = (folders: any, folder: any) => {
+  const addFolder = (folders: Array<FolderType>, folder: FolderType) => {
     folders.push(folder);
     localStorage.setItem("folders", JSON.stringify(folders));
     dispatch(({ type: FOLDER_ACTION_TYPES.ADD_FOLDER, payload: folders }));
   }
 
-  const deleteFolder = (folders: any, folderName: string) => {
+  const deleteFolder = (folders: Array<FolderType>, folderName: string) => {
     const newFolders = removeFolder(folders, folderName);
     localStorage.setItem("folders", JSON.stringify(newFolders));
     dispatch({ type: FOLDER_ACTION_TYPES.DELETE_FOLDER, payload: newFolders });
   }
 
   // need to provide a folder ID to add a button to the folder; need to construct a full button before calling this method;
-  const addButton = (folders: any, button: any) => {
+  const addButton = (folders: Array<FolderType>, button: ButtonType) => {
     const newFolders = addButtonToFolder(folders, button);
     localStorage.setItem("folders", JSON.stringify(newFolders));
     dispatch({ type: FOLDER_ACTION_TYPES.ADD_BUTTON, payload: newFolders });
   }
 
-  const deleteButton = (folders: any, buttonId: number) => {
+  const deleteButton = (folders: Array<FolderType>, buttonId: number) => {
     const newFolders = removeButtonFromFolder(folders, buttonId);
     localStorage.setItem("folders", JSON.stringify(newFolders));
     dispatch({ type: FOLDER_ACTION_TYPES.DELETE_BUTTON, payload: newFolders });
@@ -83,10 +84,10 @@ export const FolderProvider = ({ children } : {children: ReactElement}) => {
 }
 
 
-function removeFolder(folders: any, folderName: string) {
-  const newFolders: any[] = [];
+function removeFolder(folders: Array<FolderType>, folderName: string) {
+  const newFolders: Array<FolderType> = [];
 
-  folders.forEach((folder: any) => {
+  folders.forEach((folder: FolderType) => {
     if (folder.name !== folderName) {
       newFolders.push(folder);
     }
@@ -94,8 +95,8 @@ function removeFolder(folders: any, folderName: string) {
   return newFolders;
 }
 
-function addButtonToFolder(folders: any, button: any) {
-  folders.forEach((folder: any) => {
+function addButtonToFolder(folders: Array<FolderType>, button: ButtonType) {
+  folders.forEach((folder: FolderType) => {
     if (folder.id === button.folder_id) {
       folder.buttons.push(button);
     }
@@ -103,21 +104,21 @@ function addButtonToFolder(folders: any, button: any) {
   return folders;
 }
 
-function removeButtonFromFolder(foldersArray: any, buttonId: number) {
+function removeButtonFromFolder(foldersArray: Array<FolderType>, buttonId: number) {
   
-  const newFolders: any = [];
+  const newFolders: Array<FolderType> = [];
 
   // Use Object.keys() to get an array of the keys in the object
   const keys = Object.keys(foldersArray);
 
   // Iterate over the keys and create a new array of folders
-  keys.forEach((key) => {
-    const folder = foldersArray[key];
-    const newButtons: any[] = [];
+  keys.forEach((key: string) => {
+    const folder = foldersArray[key as unknown as number];
+    const newButtons: Array<ButtonType> = [];
 
     // Iterate over the buttons in the current folder and
     // create a new array with the specified button removed
-    folder.buttons.forEach((button: any) => {
+    folder.buttons.forEach((button: ButtonType) => {
       if (button.id !== buttonId) {
         newButtons.push(button);
       }
