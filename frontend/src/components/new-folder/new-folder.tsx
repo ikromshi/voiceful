@@ -16,8 +16,9 @@ const NewFolder = () => {
     setFolderName(value);
   }
 
-  const saveFolder = async () => {
+  const saveFolder = async (e: FormEvent) => {
     /// redirect issue;
+    e.preventDefault();
     await saveFoldersInDB(folderName, currentUser!.email);
     navigate("/folders");
   }
