@@ -1,5 +1,5 @@
 import { createContext, ReactElement, useReducer } from "react";
-import { ButtonType, FolderActionType, FolderContextType, FolderStateType, FolderType } from "../types/types";
+import { ButtonType, FolderContextType, FolderStateType, FolderType } from "../types/types";
 import { FOLDER_ACTION_TYPES } from "../utils/actionTypes";
 
 export const FolderContext = createContext<FolderContextType>({

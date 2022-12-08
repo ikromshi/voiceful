@@ -4,7 +4,7 @@ import TextReader from "../text-reader/text-reader";
 import { UserContext } from "../../contexts/user.context";
 import { FolderContext } from "../../contexts/folder.context";
 import ButtonsPreview from "../buttons-preview/buttons-preview";
-import { FolderType, UserType } from "../../types/types";
+import { UserType } from "../../types/types";
 import Introduction from "../introduction/introduction";
 import { HomeButton, HomeButtonSvg, HomeLink, HomeLinkDiv, WelcomeMessage } from "./home.styles";
 
@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     currentUser !== null ? fetchFoldersFromAPI(foldersAPI, currentUser, "POST", setFolders) : fetchFoldersFromAPI(localFoldersPath, currentUser, "GET", setFolders);
-  }, []);
+  }, [currentUser]);
 
   return (
     <Fragment>
