@@ -11,14 +11,13 @@ const FoldersPreview = () => {
   const folders: Array<FolderType> = state.folders!;
   const { currentUser } = useContext(UserContext);
   const { setFolders } = useContext(FolderContext);
-    console.log(folders);
   useEffect(() => {
     const fetchFolders = async () => {
       await fetchFoldersFromAPI("http://127.0.0.1:5000/get_folders", currentUser, "POST", setFolders);
     };
 
     fetchFolders();
-  }, []);
+  }, [folders.length]);
 
   return (
     <div className="folders-preview">

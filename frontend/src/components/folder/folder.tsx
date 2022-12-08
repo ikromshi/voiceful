@@ -12,6 +12,17 @@ const Folder = () => {
   const { folders, setFolders }: {folders: null | Array<FolderType>, setFolders: (folders: Array<FolderType>) => void} = useContext(FolderContext);
   const { currentUser } = useContext(UserContext);
   const [buttons, setButtons] = useState([]);
+  let currentFolder: FolderType = {
+    id: 0,
+    name: "",
+    user_id: 0,
+    buttons: []
+  };
+  folders?.forEach((folder, idx) => {
+    if (folder.name === folder_name) {
+      currentFolder = folder;
+    } 
+  });
 
   localStorage.removeItem("folderName");
   localStorage.setItem("folderName", folder_name as string);
@@ -26,7 +37,7 @@ const Folder = () => {
         setButtons(folder.buttons);
       }
     });
-  }, []);
+  }, [currentFolder.buttons.length]);
 
   return (
     <div className="buttons-container">

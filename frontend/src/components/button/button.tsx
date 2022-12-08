@@ -27,7 +27,7 @@ const Button = ({button}: {button: ButtonType} ) => {
         <Volume />
       </div>
       <div className="button-name">{button.name.toUpperCase()}</div>
-      <div className="button-edit">
+      <div className="button-edit" onClick={handleDelete}>
         {currentUser && <Pencil />}
       </div>
     </div>
